@@ -35,13 +35,12 @@ module.exports = {
 				loader: 'url-loader',
             },
 			{
-				test: /\.(css)?&/,
-				exclude: [/node_modules/, /public/],
-				loader: 'css-loader'
-			},
-			{
-				test: /\.(less)?&/,
-				loader: 'less-loader'
+				test: /\.less$/,
+                use: [
+					'style-loader',
+                    'css-loader', 
+                    'less-loader'
+                ],
 			},
             {
                 test:/\.json$/,
