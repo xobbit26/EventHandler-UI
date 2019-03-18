@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Header from './Header/Header';
-import Body from './Body/Body';
-import Footer from './Footer/Footer';
+import Header from '../components/Header/Header';
+import Body from '../components/Body/Body';
+import Footer from '../components/Footer/Footer';
 
 class App extends Component{
     render(){
