@@ -22,14 +22,31 @@ module.exports = {
 		rules: [
 			{
 				test: /\.(js|jsx)?$/,
-				exclude: /node_modules/,
+				exclude: [/node_modules/, /public/],
 				use: [
 					{
 						loader: 'babel-loader',
 						options: { presets: ["@babel/preset-env", "@babel/preset-react"] }
 					}
 				]
-			}
+			},
+			{
+				test: /\.(png|jpg|gif|svg)$/,
+				loader: 'url-loader',
+            },
+			{
+				test: /\.(css)?&/,
+				exclude: [/node_modules/, /public/],
+				loader: 'css-loader'
+			},
+			{
+				test: /\.(less)?&/,
+				loader: 'less-loader'
+			},
+            {
+                test:/\.json$/,
+                loader: "json-loader",
+            }
 		]
 	},
 };

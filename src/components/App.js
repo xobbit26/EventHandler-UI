@@ -1,10 +1,18 @@
-import React from 'react';
-import ReactDom from 'react-dom';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-class App extends React.Component{
+import Header from './Header/Header';
+import Body from './Body/Body';
+import Footer from './Footer/Footer';
+
+class App extends Component{
     render(){
         return(
-            <div>app</div>
+            <div>
+                <Header />
+                <Body />
+                <Footer />
+            </div>
         );
     }
 }
