@@ -1,4 +1,5 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
 	entry: './src/main.js',
@@ -12,12 +13,15 @@ module.exports = {
 		contentBase: path.join(__dirname, './public'),
 		filename: 'index.html',
 		compress: true,
-		port: 8097
+		port: 8097,
+		sourceMapFilename: 'bundle.js.map'
 	},
 	resolve: {
 		extensions: ['*', '.js', '.jsx']
 	},
-
+	optimization: {
+		minimizer: [new UglifyJsPlugin()],
+	},
 	module: {
 		rules: [
 			{
