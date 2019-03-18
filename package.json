@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/xobbit26/RequestController-UI#readme",
   "dependencies": {
+    "less": "^3.9.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },
