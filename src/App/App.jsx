@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
-import Header from '../components/Header/Header';
-import Body from '../components/Body/Body';
-import Footer from '../components/Footer/Footer';
+import { Router, Switch, Route } from 'react-router';
 
 import '../styles/app.less'
 
 class App extends Component{
     render(){
         return(
-            <div className="app">
-                <Header />
-                <Body />
-                <Footer />
-            </div>
+            <Router>
+                <Switch>
+                    <Route exact path="/" component = {Header}/>
+                </Switch>
+            </Router>
         );
     }
 }
