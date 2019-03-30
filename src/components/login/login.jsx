@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-class Footer extends Component{
+class Login extends Component{
     render(){
         return(
-            <div>Footer</div>
+            <div>Login</div>
         );
     }
 }
 
-export default Footer;
+export default Login;

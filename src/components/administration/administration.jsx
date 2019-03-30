@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-class Body extends Component{
+class Administration extends Component{
     render(){
         return(
-            <div>Body</div>
+            <div>Administration</div>
         );
     }
 }
 
-export default Body;
+export default Administration;
