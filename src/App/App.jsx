@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
 
 import Sender from '../components/sender/sender';
@@ -41,7 +41,7 @@ class App extends Component {
             <React.Fragment>
                 {isBackendAvailable &&
                     <React.Fragment>
-                        <Header isAuthentificated={isAuthentificated} />
+                        <Header isAuthentificated={isAuthentificated}/>
                         <Switch>
                             <Route exact path="/" component={Sender} />
                             <Route path="/login" component={Login} />
