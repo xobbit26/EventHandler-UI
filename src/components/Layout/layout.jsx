@@ -56,14 +56,16 @@ class Layout extends Component {
                 <AppBar position="fixed" className={classNames(classes.appBar, { [classes.appBarShift]: open, })}>
                     <Toolbar disableGutters={!open}>
 
-                        <IconButton
-                            color="inherit"
-                            aria-label="Open drawer"
-                            onClick={this.handleDrawerOpen}
-                            className={classNames(classes.menuButton, open && classes.hide)}
-                        >
-                            <MenuIcon />
-                        </IconButton>
+                        {!isAuthentificated &&
+                            <IconButton
+                                color="inherit"
+                                aria-label="Open drawer"
+                                onClick={this.handleDrawerOpen}
+                                className={classNames(classes.menuButton, open && classes.hide)}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        }
 
                         <Typography className={classes.grow} variant="h6" color="inherit">
                             RC

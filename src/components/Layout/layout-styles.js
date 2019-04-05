@@ -6,7 +6,13 @@ const layoutStyles = theme => ({
     },
 
     grow: {
+        marginLeft: 25,
         flexGrow: 1,
+    },
+
+    menuButton: {
+        marginLeft: 12,
+        marginRight: 20,
     },
 
     appBar: {
@@ -25,13 +31,8 @@ const layoutStyles = theme => ({
         }),
     },
 
-    menuButton: {
-        marginLeft: 12,
-        marginRight: 20,
-    },
-
-    loginButton:{
-        marginRight:20
+    loginButton: {
+        marginRight: 20
     },
 
     hide: {
@@ -64,7 +65,7 @@ const layoutStyles = theme => ({
         }),
         marginLeft: -drawerWidth,
     },
-    
+
     contentShift: {
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.easeOut,
