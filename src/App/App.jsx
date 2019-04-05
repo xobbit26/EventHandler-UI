@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import Layout from '../components//Layout/layout';
 
-import '../styles/app.less';
-
 class App extends Component {
-
     constructor(props) {
         super(props);
-
-        this.state = {
-            isAuthentificated: false,
-            isBackendAvailable: true,
-        };
-
+    
         //this.checkForAuthentification();
         //this.checkBackendAvailability();
     }
+
+    state = {
+        isAuthentificated: false,
+        isBackendAvailable: true,
+    };
 
     //TODO: Find out whats wrong with it
     // checkForAuthentification() {
