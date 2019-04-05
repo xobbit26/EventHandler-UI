@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
 
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import styles from './sender-style';
+
+import senderStyles from './sender-style';
 
 class Sender extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props)
     }
 
     render() {
         const { classes } = this.props;
         return (
             <div>
-                <Grid container spacing={8} justify="center" style={{ minHeight: '8vh' }}>
+                <Grid container justify="center">
                     <List className={classes.root}>
                         <ListItem>
                             <TextField
@@ -70,4 +69,4 @@ class Sender extends Component {
     }
 }
 
-export default withStyles(styles)(Sender);
+export default withStyles(senderStyles)(Sender);

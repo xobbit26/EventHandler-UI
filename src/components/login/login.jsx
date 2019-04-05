@@ -1,30 +1,55 @@
 import React, { Component } from 'react';
 
-import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
+import loginStyles from './login-styles';
 
 class Login extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
+        const { classes } = this.props;
         return (
             <div>
-                <Typography paragraph>
-                    Login
-                </Typography>
-                <Typography paragraph>
-
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                    incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent
-                    elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in
-                    hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum
-                    velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing.
-                    Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis
-                    viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo.
-                    Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus
-                    at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed
-                    ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-                 </Typography>
+                <Grid container justify="center">
+                    <List className={classes.root}>
+                        <ListItem>
+                            <TextField
+                                id="standard-full-width"
+                                label="Login"
+                                style={{ width: '100%' }}
+                                variant="outlined"
+                                margin="normal"
+                                InputLabelProps={{ shrink: true }}
+                            />
+                        </ListItem>
+                        <ListItem>
+                            <TextField
+                                id="standard-full-width"
+                                label="Password"
+                                style={{ width: '100%' }}
+                                variant="outlined"
+                                margin="normal"
+                                InputLabelProps={{ shrink: true }}
+                            />
+                        </ListItem>
+                        <ListItem>
+                            <Button variant="contained" color="secondary">
+                                Войти
+                            </Button>
+                        </ListItem>
+                    </List>
+                </Grid>
             </div>
         );
     }
 }
 
-export default Login;
+export default withStyles(loginStyles)(Login);
