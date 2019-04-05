@@ -34,26 +34,34 @@ module.exports = {
 				use: [
 					{
 						loader: 'babel-loader',
-						options: { presets: ["@babel/preset-env", "@babel/preset-react"] }
+						options: {
+							presets: [
+								"@babel/preset-env",
+								"@babel/preset-react",
+								{
+									plugins: ['@babel/plugin-proposal-class-properties']
+								}
+							]
+						}
 					}
 				]
 			},
 			{
 				test: /\.(png|jpg|gif|svg)$/,
 				loader: 'url-loader',
-            },
+			},
 			{
 				test: /\.less$/,
-                use: [
+				use: [
 					'style-loader',
-                    'css-loader', 
-                    'less-loader'
-                ],
+					'css-loader',
+					'less-loader'
+				],
 			},
-            {
-                test:/\.json$/,
-                loader: "json-loader",
-            }
+			{
+				test: /\.json$/,
+				loader: "json-loader",
+			}
 		]
 	},
 };

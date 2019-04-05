@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Switch, Route } from 'react-router-dom';
-
-import Sender from '../components/sender/sender';
-import Login from '../components/login/login';
-import Administration from '../components/administration/administration';
-import Header from '../components/Header/header';
-import NotFound_404 from '../components/404NotFound/404notFound';
+import Layout from '../components//Layout/layout';
 
 import '../styles/app.less';
 
@@ -41,16 +34,7 @@ class App extends Component {
             <React.Fragment>
                 {isBackendAvailable &&
                     <React.Fragment>
-                        <Header isAuthentificated={isAuthentificated}/>
-                        <Switch>
-                            <Route exact path="/" component={Sender} />
-                            <Route path="/login" component={Login} />
-
-                            {isAuthentificated &&
-                                <Route path="/administration" component={Administration} />
-                            }
-                            <Route path="*" component={NotFound_404} />
-                        </Switch>
+                        <Layout isAuthentificated={isAuthentificated} />
                     </React.Fragment>
                 }
                 {!isBackendAvailable &&
