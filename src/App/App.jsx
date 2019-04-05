@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Layout from '../components//Layout/layout';
+import Layout from '../components/Layout/layout';
+
 
 class App extends Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class App extends Component {
                         Backend is not available
                     </React.Fragment>
                 }
+                
             </React.Fragment>
         );
     }
