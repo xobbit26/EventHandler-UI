@@ -11,7 +11,7 @@ class App extends Component {
     }
 
     state = {
-        isAuthentificated: false,
+        isAuthentificated: true,
         isBackendAvailable: true,
     };
 

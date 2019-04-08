@@ -1,31 +1,27 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import {
+    withStyles, AppBar, Toolbar, Typography,
+    Button, IconButton, CssBaseline, Drawer,
+    Divider, List, ListItem, ListItemIcon, ListItemText,
+
+} from '@material-ui/core/';
+
+import {
+    Menu as MenuIcon, Settings as SettingIcon,
+    AccountCircle as AccountCircleIcon, Assessment as AssessmentIcon,
+    ViewList as ViewListIcon, ChevronLeft as ChevronLeftIcon,
+    ChevronRight as ChevronRightIcon
+} from '@material-ui/icons/';
+
 import classNames from 'classnames';
-import Drawer from '@material-ui/core/Drawer';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import SettingIcon from '@material-ui/icons/Settings';
-import AccountCircle from '@material-ui/icons/accountCircle';
-import Assessment from '@material-ui/icons/Assessment';
-import ViewList from '@material-ui/icons/ViewList';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
 import Sender from '../sender/sender';
 import Login from '../login/login';
 import Administration from '../administration/administration';
+import Settings from '../settings/settings';
+import Reports from '../Reports/reports';
+import RequestList from '../requestList/request-list';
 import NotFound_404 from '../404NotFound/404notFound';
 
 import layoutStyles from './layout-styles';
@@ -58,7 +54,7 @@ class Layout extends Component {
                 <AppBar position="fixed" className={classNames(classes.appBar, { [classes.appBarShift]: open, })}>
                     <Toolbar disableGutters={!open}>
 
-                        {!isAuthentificated &&
+                        {isAuthentificated &&
                             <IconButton
                                 color="inherit"
                                 aria-label="Open drawer"
@@ -69,7 +65,7 @@ class Layout extends Component {
                             </IconButton>
                         }
 
-                        <Typography className={classes.grow} variant="h6" color="inherit">
+                        <Typography className={classes.grow} variant="h6" color="inherit" component={Link} to="/">
                             RC
                         </Typography>
 
@@ -92,22 +88,22 @@ class Layout extends Component {
                     </div>
                     <Divider />
                     <List>
-                        <ListItem button key='request-list'>
-                            <ListItemIcon><ViewList /></ListItemIcon>
+                        <ListItem button key='request-list' component={Link} to="/request-list">
+                            <ListItemIcon><ViewListIcon /></ListItemIcon>
                             <ListItemText primary='Список заявок' />
                         </ListItem>
-                        <ListItem button key='reports'>
-                            <ListItemIcon><Assessment /></ListItemIcon>
+                        <ListItem button key='reports' component={Link} to="/reports">
+                            <ListItemIcon><AssessmentIcon /></ListItemIcon>
                             <ListItemText primary='Отчеты' />
                         </ListItem>
-                        <ListItem button key='administration'>
-                            <ListItemIcon><AccountCircle /></ListItemIcon>
+                        <ListItem button key='administration' component={Link} to="/administration">
+                            <ListItemIcon><AccountCircleIcon /></ListItemIcon>
                             <ListItemText primary='Админка' />
                         </ListItem>
                     </List>
                     <Divider />
                     <List>
-                        <ListItem button key="settings">
+                        <ListItem button key="settings" component={Link} to="/settings">
                             <ListItemIcon><SettingIcon /></ListItemIcon>
                             <ListItemText primary="Настройки" />
                         </ListItem>
@@ -126,6 +122,9 @@ class Layout extends Component {
                         {isAuthentificated &&
                             <Route path="/administration" component={Administration} />
                         }
+                        <Route path="/settings" component={Settings} />
+                        <Route path="/reports" component={Reports} />
+                        <Route path="/request-list" component={RequestList} />
                         <Route path="*" component={NotFound_404} />
                     </Switch>
                 </main>

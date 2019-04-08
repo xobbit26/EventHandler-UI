@@ -2,12 +2,13 @@ const drawerWidth = 240;
 const layoutStyles = theme => ({
     root: {
         display: 'flex',
-        flexGrow: 1
+        flexGrow: 1,
     },
 
     grow: {
         marginLeft: 25,
         flexGrow: 1,
+        textDecoration: 'none'
     },
 
     menuButton: {
