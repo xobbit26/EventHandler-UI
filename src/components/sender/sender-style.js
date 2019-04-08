@@ -2,7 +2,7 @@ const senderStyle = theme => ({
     root: {
         width: '100%',
         height: '100%',
-        width: 900,
+        width: 800,
         borderRadius: 5,
         padding:10,
         backgroundColor: theme.palette.background.paper
