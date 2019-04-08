@@ -16,6 +16,23 @@ class Sender extends Component {
         console.log(props)
     }
 
+    state = {
+        fio: "",
+        department: "",
+        description: ""
+    }
+
+    sendNewRequest = () => {
+        //Post api
+        console.log(this.state)
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -24,29 +41,33 @@ class Sender extends Component {
                     <List className={classes.root}>
                         <ListItem>
                             <TextField
-                                id="standard-full-width"
+                                id="fio"
                                 label="ФИО отправителя"
                                 style={{ width: '100%' }}
                                 variant="outlined"
                                 margin="normal"
                                 InputLabelProps={{ shrink: true }}
+                                defaultValue={this.state.fio}
+                                onChange={e=>this.handleChange(e)}
                             />
                         </ListItem>
 
                         <ListItem>
                             <TextField
-                                id="standard-full-width"
+                                id="department"
                                 label="Отдел"
                                 style={{ width: '100%' }}
                                 variant="outlined"
                                 margin="normal"
                                 InputLabelProps={{ shrink: true }}
+                                defaultValue={this.state.department}
+                                onChange={e=>this.handleChange(e)}
                             />
                         </ListItem>
 
                         <ListItem>
                             <TextField
-                                id="outlined-multiline-flexible"
+                                id="description"
                                 label="Описание"
                                 multiline
                                 rows="10"
@@ -55,11 +76,13 @@ class Sender extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 style={{ width: '100%' }}
+                                defaultValue={this.state.description}
+                                onChange={e=>this.handleChange(e)}
                             />
                         </ListItem>
 
                         <ListItem alignItems="center">
-                            <Button variant="contained" color="secondary">
+                            <Button variant="contained" color="secondary" onClick={this.sendNewRequest}>
                                 Отправить
                             </Button>
                         </ListItem>
