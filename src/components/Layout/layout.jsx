@@ -16,8 +16,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import SettingIcon from '@material-ui/icons/Settings';
+import AccountCircle from '@material-ui/icons/accountCircle';
+import Assessment from '@material-ui/icons/Assessment';
+import ViewList from '@material-ui/icons/ViewList';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
@@ -90,21 +92,25 @@ class Layout extends Component {
                     </div>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
+                        <ListItem button key='request-list'>
+                            <ListItemIcon><ViewList /></ListItemIcon>
+                            <ListItemText primary='Список заявок' />
+                        </ListItem>
+                        <ListItem button key='reports'>
+                            <ListItemIcon><Assessment /></ListItemIcon>
+                            <ListItemText primary='Отчеты' />
+                        </ListItem>
+                        <ListItem button key='administration'>
+                            <ListItemIcon><AccountCircle /></ListItemIcon>
+                            <ListItemText primary='Админка' />
+                        </ListItem>
                     </List>
                     <Divider />
                     <List>
-                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
+                        <ListItem button key="settings">
+                            <ListItemIcon><SettingIcon /></ListItemIcon>
+                            <ListItemText primary="Настройки" />
+                        </ListItem>
                     </List>
                 </Drawer>
 
