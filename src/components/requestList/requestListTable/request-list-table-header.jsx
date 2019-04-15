@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TableCell, TableHead, TableRow, TableSortLabel, Checkbox, Tooltip } from '@material-ui/core/';
+import { TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@material-ui/core/';
 
 
 class TableHeader extends Component {
@@ -14,33 +14,24 @@ class TableHeader extends Component {
 
     render() {
 
-        const { onSelectAllClick, order, orderBy } = this.props.options;
-        const numSelected = this.props.tableState.selected.length;
-        const rowCount = this.props.tableState.data.length;
+        const { order, orderBy } = this.props.options;
         const { columns } = this.props.tableState;
 
         return (
             <TableHead>
                 <TableRow>
-                    <TableCell padding="checkbox">
-                        <Checkbox
-                            indeterminate={numSelected > 0 && numSelected < rowCount}
-                            checked={numSelected === rowCount}
-                            onChange={onSelectAllClick}
-                        />
-                    </TableCell>
                     {columns.map(
                         column => (
                             <TableCell
                                 key={column.id}
-                                align='left'
+                                align={column.numeric ? 'right' : 'left'}
                                 padding={column.disablePadding ? 'none' : 'default'}
                                 sortDirection={orderBy === column.id ? order : false}
                             >
                                 <Tooltip
                                     title="Sort"
                                     placement={column.numeric ? 'bottom-end' : 'bottom-start'}
-                                    enterDelay={300}
+                                    enterDelay={200}
                                 >
                                     <TableSortLabel
                                         active={orderBy === column.id}

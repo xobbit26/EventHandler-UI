@@ -33,7 +33,7 @@ class Body extends Component {
 
     render() {
 
-        const { handleClick, isSelected } = this.props.options;
+        const { handleClick } = this.props.options;
         const { data, order, orderBy, rowsPerPage, page } = this.props.tableState;
 
         return (
@@ -45,16 +45,10 @@ class Body extends Component {
                             <TableRow
                                 hover
                                 onClick={event => handleClick(event, n.id)}
-                                role="checkbox"
-                                aria-checked={isSelected(n.id)}
                                 tabIndex={-1}
                                 key={n.id}
-                                selected={isSelected(n.id)}
                             >
-                                <TableCell padding="checkbox">
-                                    <Checkbox checked={isSelected(n.id)} />
-                                </TableCell>
-                                <TableCell component="th" scope="row" padding="none">
+                                <TableCell component="th" scope="row" padding="dense">
                                     {n.fio}
                                 </TableCell>
                                 <TableCell align="left">{n.date}</TableCell>

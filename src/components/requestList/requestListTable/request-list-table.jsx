@@ -7,7 +7,7 @@ import TableBody from './request-list-table-body';
 import tableStyles from './table-styles';
 
 const tableColumns = [
-    { id: 'fio', numeric: false, disablePadding: true, label: 'ФИО подавшего заявку' },
+    { id: 'fio', numeric: false, disablePadding: false, label: 'ФИО подавшего заявку' },
     { id: 'date', numeric: false, disablePadding: false, label: 'Время подачи' },
     { id: 'descripton', numeric: false, disablePadding: false, label: 'Текст заявки' },
     { id: 'responsible', numeric: false, disablePadding: false, label: 'Ответственный' },
@@ -24,7 +24,6 @@ class RequestListTable extends Component {
         columns: tableColumns,
         order: 'asc',
         orderBy: 'fio',
-        selected: [],
         data: this.props.tableData,
         page: 0,
         rowsPerPage: 10
@@ -49,48 +48,19 @@ class RequestListTable extends Component {
         this.setState({ order, orderBy });
     };
 
-    handleSelectAllClick = event => {
-        if (event.target.checked) {
-            this.setState(state => ({ selected: state.data.map(n => n.id) }));
-            return;
-        }
-        this.setState({ selected: [] });
-    };
-
     handleClick = (event, id) => {
-        const { selected } = this.state;
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
-
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
-            );
-        }
-
-        this.setState({ selected: newSelected });
+        console.log("handle click");
     };
-
-    isSelected = id => this.state.selected.indexOf(id) !== -1;
 
     render() {
         const { tableData, classes } = this.props;
 
         const headerOptions = {
-            onSelectAllClick: this.handleSelectAllClick,
             onRequestSort: this.handleRequestSort
         };
 
         const bodyOptions = {
-            handleClick: this.handleClick,
-            isSelected: this.isSelected
+            handleClick: this.handleClick
         };
 
         return (
