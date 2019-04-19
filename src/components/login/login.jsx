@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
-
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import { Button, withStyles, Grid, TextField, List, ListItem } from '@material-ui/core';
 
 import loginStyles from './login-styles';
+
+const inputParams = [
+    { id: 'login', label: 'Login' },
+    { id: 'password', label: 'Password' }
+];
+
+const listItemComponent = (item) => {
+    return (
+        <ListItem key={item.id}>
+            <TextField
+                id={item.id}
+                label={item.label}
+                style={{ width: '100%' }}
+                variant="outlined"
+                margin="normal"
+                InputLabelProps={{ shrink: true }}
+            />
+        </ListItem>
+    );
+};
 
 class Login extends Component {
     constructor(props) {
@@ -15,31 +29,15 @@ class Login extends Component {
     }
 
     render() {
+
         const { classes } = this.props;
+        const listElements = inputParams.map((item) => listItemComponent(item));
+
         return (
             <div>
                 <Grid container justify="center">
-                    <List className={classes.root}>
-                        <ListItem>
-                            <TextField
-                                id="standard-full-width"
-                                label="Login"
-                                style={{ width: '100%' }}
-                                variant="outlined"
-                                margin="normal"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </ListItem>
-                        <ListItem>
-                            <TextField
-                                id="standard-full-width"
-                                label="Password"
-                                style={{ width: '100%' }}
-                                variant="outlined"
-                                margin="normal"
-                                InputLabelProps={{ shrink: true }}
-                            />
-                        </ListItem>
+                    <List className={classes.list}>
+                        {listElements}
                         <ListItem>
                             <Button variant="contained" color="secondary">
                                 Войти

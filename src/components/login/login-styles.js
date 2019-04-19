@@ -1,13 +1,14 @@
 const loginStyles = theme => ({
-    root: {
+    list: {
         width: '100%',
         height: '100%',
         width: 800,
-        minWidth: 400,
         borderRadius: 5,
-        padding: 10,
-        backgroundColor: theme.palette.background.paper
-    }
+        padding:15,
+        backgroundColor: theme.palette.background.paper,
+        marginTop: theme.spacing.unit,
+        boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2)'
+    },
 });
 
 export default loginStyles;

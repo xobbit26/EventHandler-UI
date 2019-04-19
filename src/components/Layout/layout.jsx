@@ -26,7 +26,7 @@ import NotFound_404 from '../404NotFound/404notFound';
 
 import layoutStyles from './layout-styles';
 
-const menuListItems = [
+const menuListItemsParams = [
     { key: 'request-list', name: 'Список заявок', url: '/request-list', icon: <ViewListIcon /> },
     { key: 'reports', name: 'Отчеты', url: '/reports', icon: <AssessmentIcon /> },
     { key: 'administration', name: 'Админка', url: '/administration', icon: <AccountCircleIcon /> },
@@ -51,7 +51,7 @@ class Layout extends Component {
     };
 
     getMenuListItems() {
-        const menuElementList = menuListItems.map((item) => {
+        const menuElementList = menuListItemsParams.map((item) => {
             return (
                 <ListItem button key={item.key} component={Link} to={item.url}>
                     <ListItemIcon>{item.icon}</ListItemIcon>
