@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { withStyles, Table, TablePagination } from '@material-ui/core/';
-
 import TableHeader from './request-list-table-header';
 import TableBody from './request-list-table-body';
-
 import tableStyles from './table-styles';
 
 const tableColumns = [
     { id: 'fio', numeric: false, disablePadding: false, label: 'ФИО подавшего заявку' },
-    { id: 'date', numeric: false, disablePadding: false, label: 'Время подачи' },
-    { id: 'descripton', numeric: false, disablePadding: false, label: 'Текст заявки' },
+    { id: 'date', numeric: false, disablePadding: false, label: 'Дата и время подачи' },
+    { id: 'descripton', numeric: false, disablePadding: false, label: 'Описание' },
     { id: 'responsible', numeric: false, disablePadding: false, label: 'Ответственный' },
-    { id: 'resolve-date', numeric: false, disablePadding: false, label: 'Время выполнения' },
+    { id: 'status', numeric: false, disablePadding: false, label: 'Статус' },
+    { id: 'resolve-date', numeric: false, disablePadding: false, label: 'Дата и время выполнения' },
 ];
 
 class RequestListTable extends Component {

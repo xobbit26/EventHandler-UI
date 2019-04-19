@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TableBody, TableCell, TableRow, Checkbox } from '@material-ui/core/';
+import { TableBody, TableCell, TableRow } from '@material-ui/core/';
 
 function stableSort(array, cmp) {
     const stabilizedThis = array.map((el, index) => [el, index]);
@@ -48,12 +48,11 @@ class Body extends Component {
                                 tabIndex={-1}
                                 key={n.id}
                             >
-                                <TableCell component="th" scope="row" padding="dense">
-                                    {n.fio}
-                                </TableCell>
+                                <TableCell>{n.fio}</TableCell>
                                 <TableCell align="left">{n.date}</TableCell>
                                 <TableCell align="left">{n.description}</TableCell>
                                 <TableCell align="left">{n.responsible}</TableCell>
+                                <TableCell align="left">{n.status}</TableCell>
                                 <TableCell align="left">{n.resolveDate}</TableCell>
                             </TableRow>
                         );
