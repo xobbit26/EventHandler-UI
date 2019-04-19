@@ -26,10 +26,16 @@ import NotFound_404 from '../404NotFound/404notFound';
 
 import layoutStyles from './layout-styles';
 
+const menuListItems = [
+    { key: 'request-list', name: 'Список заявок', url: '/request-list', icon: <ViewListIcon /> },
+    { key: 'reports', name: 'Отчеты', url: '/reports', icon: <AssessmentIcon /> },
+    { key: 'administration', name: 'Админка', url: '/administration', icon: <AccountCircleIcon /> },
+    { key: 'settings', name: 'Настройки', url: '/settings', icon: <SettingIcon /> }
+];
+
 class Layout extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
     }
 
     state = {
@@ -42,6 +48,18 @@ class Layout extends Component {
 
     handleDrawerClose = () => {
         this.setState({ open: false });
+    };
+
+    getMenuListItems() {
+        const menuElementList = menuListItems.map((item) => {
+            return (
+                <ListItem button key={item.key} component={Link} to={item.url}>
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.name} />
+                </ListItem>
+            );
+        })
+        return menuElementList;
     };
 
     render() {
@@ -64,11 +82,7 @@ class Layout extends Component {
                                 <MenuIcon />
                             </IconButton>
                         }
-
-                        <Typography className={classes.grow} variant="h6" color="inherit" component={Link} to="/">
-                            RC
-                        </Typography>
-
+                        <Typography className={classes.grow} variant="h6" color="inherit" component={Link} to="/">RC</Typography>
                         <Button color="inherit" href="#/login" className={classes.loginButton}>Login</Button>
                     </Toolbar>
                 </AppBar>
@@ -88,25 +102,7 @@ class Layout extends Component {
                     </div>
                     <Divider />
                     <List>
-                        <ListItem button key='request-list' component={Link} to="/request-list">
-                            <ListItemIcon><ViewListIcon /></ListItemIcon>
-                            <ListItemText primary='Список заявок' />
-                        </ListItem>
-                        <ListItem button key='reports' component={Link} to="/reports">
-                            <ListItemIcon><AssessmentIcon /></ListItemIcon>
-                            <ListItemText primary='Отчеты' />
-                        </ListItem>
-                        <ListItem button key='administration' component={Link} to="/administration">
-                            <ListItemIcon><AccountCircleIcon /></ListItemIcon>
-                            <ListItemText primary='Админка' />
-                        </ListItem>
-                    </List>
-                    <Divider />
-                    <List>
-                        <ListItem button key="settings" component={Link} to="/settings">
-                            <ListItemIcon><SettingIcon /></ListItemIcon>
-                            <ListItemText primary="Настройки" />
-                        </ListItem>
+                        {this.getMenuListItems()}
                     </List>
                 </Drawer>
 
