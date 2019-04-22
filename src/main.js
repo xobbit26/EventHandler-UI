@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { HashRouter as Router } from 'react-router-dom';
-
 import { MuiThemeProvider } from '@material-ui/core/styles/';
 import mainTheme from '../src/styles/mainTheme';
-
 import App from '../src/App/App';
+import allReducers from './reducers/index';
+
+const store = createStore(allReducers);
 
 ReactDOM.render(
-    <Router>
-        <MuiThemeProvider theme={mainTheme}>
-            <App />
-        </MuiThemeProvider>
-    </Router>,
+    <Provider store={store}>
+        <Router>
+            <MuiThemeProvider theme={mainTheme}>
+                <App />
+            </MuiThemeProvider>
+        </Router>
+    </Provider>,
     document.getElementById('app')
 );

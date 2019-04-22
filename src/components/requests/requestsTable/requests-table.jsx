@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles, Table, TablePagination } from '@material-ui/core/';
-import TableHeader from './request-list-table-header';
-import TableBody from './request-list-table-body';
+import TableHeader from './requests-table-header';
+import TableBody from './requests-table-body';
 import tableStyles from './table-styles';
 
 const tableColumns = [
@@ -13,7 +13,7 @@ const tableColumns = [
     { id: 'resolve-date', numeric: false, disablePadding: false, label: 'Дата и время выполнения' },
 ];
 
-class RequestListTable extends Component {
+class RequestsTable extends Component {
 
     constructor(props) {
         super(props);
@@ -89,4 +89,4 @@ class RequestListTable extends Component {
     }
 }
 
-export default withStyles(tableStyles)(RequestListTable)
+export default withStyles(tableStyles)(RequestsTable)
