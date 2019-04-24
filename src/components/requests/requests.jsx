@@ -24,7 +24,6 @@ class Requests extends React.Component {
 }
 
 function mapStateToProps(state) {
-    debugger;
     return {
         tableData: state.requests
     }

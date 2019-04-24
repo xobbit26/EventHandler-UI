@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Button, withStyles, Grid, TextField, List, ListItem } from '@material-ui/core';
-
 import senderStyles from './sender-style';
+import { sendRequest } from '../../actions/sender.actions';
+import { getFioState, getDepartmentState, getDescriptionState } from '../../reducers/sender.reducer';
 
 const inputParams = [
     { id: 'fio', label: 'ФИО отправителя', multiline: false },
@@ -9,21 +12,37 @@ const inputParams = [
     { id: 'description', label: 'ФИО отправителя', multiline: true, rows: 10 }
 ];
 
-const listItemComponent = (item) => {
-    return (
-        <ListItem key={item.id}>
-            <TextField
-                id={item.id}
-                label={item.label}
-                style={{ width: '100%' }}
-                variant="outlined"
-                margin="normal"
-                InputLabelProps={{ shrink: true }}
-                multiline={item.multiline}
-                rows={item.rows}
-            />
-        </ListItem>
-    );
+class Inputs extends Component {
+    constructor(props) {
+        super(props);
+        //console.log(this.props);
+    };
+
+    render() {
+        
+        return (
+            <div>
+                {inputParams.map((item) => {
+                    return (
+                        <ListItem key={item.id}>
+                            <TextField
+                                id={item.id}
+                                label={item.label}
+                                style={{ width: '100%' }}
+                                variant="outlined"
+                                margin="normal"
+                                InputLabelProps={{ shrink: true }}
+                                multiline={item.multiline}
+                                rows={item.rows}
+                                onChange={(event) => this.props.handleChange(event)}
+                                //value={this.props[item.id].value}
+                            />
+                        </ListItem>
+                    );
+                })}
+            </div>
+        )
+    };
 };
 
 class Sender extends Component {
@@ -32,20 +51,27 @@ class Sender extends Component {
         super(props);
     };
 
-    sendNewRequest = () => {
-        //Post api
-        console.log(this.state);
+    handleChange = (event) => {
+        const { id, value } = event.target;
+        this.setState({ [id]: value });
     };
+
+
+    //find out how to do it better (through state or props)
+    onSend = () => {
+        this.props.sendRequest(this.state);
+        debugger;
+    };
+
 
     render() {
         const { classes } = this.props;
-        const listItemComponents = inputParams.map((item) => listItemComponent(item));
         return (
             <Grid container justify="center">
                 <List className={classes.list}>
-                    {listItemComponents}
+                    <Inputs handleChange={this.handleChange} />
                     <ListItem alignItems="center">
-                        <Button variant="contained" color="secondary" onClick={this.sendNewRequest}>
+                        <Button variant="contained" color="secondary" onClick={this.onSend}>
                             Отправить
                         </Button>
                     </ListItem>
@@ -55,4 +81,16 @@ class Sender extends Component {
     };
 };
 
-export default withStyles(senderStyles)(Sender);
+function mapStateToProps(state) {
+    return {
+        fio: getFioState(state),
+        department: getDepartmentState(state),
+        description: getDescriptionState(state)
+    };
+};
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({ sendRequest: sendRequest }, dispatch);
+};
+
+export default connect(mapStateToProps, matchDispatchToProps)(withStyles(senderStyles)(Sender));

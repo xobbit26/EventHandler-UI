@@ -17,15 +17,15 @@ class RequestsTable extends Component {
 
     constructor(props) {
         super(props);
-    };
-
-    state = {
-        columns: tableColumns,
-        order: 'asc',
-        orderBy: 'fio',
-        data: this.props.tableData,
-        page: 0,
-        rowsPerPage: 10
+        
+        this.state = {
+            columns: tableColumns,
+            order: 'asc',
+            orderBy: 'fio',
+            data: this.props.tableData,
+            page: 0,
+            rowsPerPage: 10
+        };
     };
 
     handleChangePage = (event, page) => {
