@@ -68,7 +68,7 @@ class RequestsTable extends Component {
                     <TableHeader tableState={this.state} options={headerOptions} />
                     <TableBody tableState={this.state} options={bodyOptions} />
                 </Table>
-                <TablePagination
+                {/* <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
                     count={tableData.length}
@@ -82,7 +82,7 @@ class RequestsTable extends Component {
                     }}
                     onChangePage={this.handleChangePage}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                />
+                /> */}
             </div>
 
         )

@@ -9,8 +9,8 @@ import { getFioState, getDepartmentState, getDescriptionState } from '../../redu
 
 const inputParams = [
     { id: 'fio', label: 'ФИО отправителя', multiline: false },
-    { id: 'department', label: 'ФИО отправителя', multiline: false },
-    { id: 'description', label: 'ФИО отправителя', multiline: true, rows: 10 }
+    { id: 'department', label: 'Отдел', multiline: false },
+    { id: 'description', label: 'Описание', multiline: true, rows: 10 }
 ];
 
 class Inputs extends Component {
@@ -19,7 +19,7 @@ class Inputs extends Component {
     };
 
     render() {
-        
+
         return (
             <div>
                 {inputParams.map((item) => {
@@ -79,7 +79,7 @@ class Sender extends Component {
     };
 };
 
-Sender.propTypes={
+Sender.propTypes = {
     fio: PropTypes.string,
     department: PropTypes.string,
     description: PropTypes.string

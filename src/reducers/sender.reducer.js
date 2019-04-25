@@ -1,4 +1,4 @@
-import { SEND_REQUEST } from '../actions/action-types';
+import { CREATE_REQUEST } from '../actions/action-types';
 import { fromJS } from 'immutable';
 
 const initialState = fromJS({
@@ -9,7 +9,7 @@ const initialState = fromJS({
 
 const sender = (state = initialState, action) => {
     switch (action.type) {
-        case SEND_REQUEST:
+        case CREATE_REQUEST:
             return state.merge({ fio: action.payload.fio });
         default:
             return state;

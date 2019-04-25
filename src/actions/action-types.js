@@ -1,1 +1,2 @@
-export const SEND_REQUEST = 'SEND_REQUEST';
+export const CREATE_REQUEST = 'CREATE_REQUEST';
+export const GET_REQUESTS = 'GET_REQUESTS';
