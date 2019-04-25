@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { Button, withStyles, Grid, TextField, List, ListItem } from '@material-ui/core';
 import senderStyles from './sender-style';
 import { sendRequest } from '../../actions/sender.actions';
@@ -15,7 +16,6 @@ const inputParams = [
 class Inputs extends Component {
     constructor(props) {
         super(props);
-        //console.log(this.props);
     };
 
     render() {
@@ -35,7 +35,6 @@ class Inputs extends Component {
                                 multiline={item.multiline}
                                 rows={item.rows}
                                 onChange={(event) => this.props.handleChange(event)}
-                                //value={this.props[item.id].value}
                             />
                         </ListItem>
                     );
@@ -60,7 +59,6 @@ class Sender extends Component {
     //find out how to do it better (through state or props)
     onSend = () => {
         this.props.sendRequest(this.state);
-        debugger;
     };
 
 
@@ -80,6 +78,12 @@ class Sender extends Component {
         );
     };
 };
+
+Sender.propTypes={
+    fio: PropTypes.string,
+    department: PropTypes.string,
+    description: PropTypes.string
+}
 
 function mapStateToProps(state) {
     return {
