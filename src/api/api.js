@@ -3,10 +3,23 @@ import { API_URL } from '../config';
 export const CREATE_REQUEST_URL = `${API_URL}/api/create-request`;
 
 export const post = (url, data = {}, options = {}) => {
-    console.log(`post url for create request: ${url}`);
-    createRequest(data);
-    console.log(requests);
-    return true;
+
+    const request = JSON.stringify(createRequest(data));
+    options = {
+        method: 'POST',
+        body: request
+    };
+
+    const headers = {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+    };
+
+    return fetch(url, { ...options, headers })
+        .then(response => console.log(response))
+        .catch((error) => {
+            throw error;
+        });
 }
 
 export const get = (url, data = {}, options = {}) => {
@@ -14,12 +27,8 @@ export const get = (url, data = {}, options = {}) => {
     return requests;
 }
 
-const requests = [];
-
 const createRequest = (data) => {
-    let id = requests.length + 1;
-    let request = {
-        id: id,
+    return {
         fio: data.fio,
         date: Date.now(),
         department: data.department,
@@ -28,6 +37,4 @@ const createRequest = (data) => {
         status: "В очереди",
         resolveDate: ""
     };
-
-    requests.push(request);
 }
