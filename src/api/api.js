@@ -1,6 +1,14 @@
 import { API_URL } from '../config';
 
 export const CREATE_REQUEST_URL = `${API_URL}/api/create-request`;
+export const GET_REQUESTS_URL = `${API_URL}/api/get-requests`;
+
+
+const headers = {
+    'content-type': 'application/json',
+    'accept': 'application/json'
+};
+
 
 export const post = (url, data = {}, options = {}) => {
 
@@ -8,11 +16,6 @@ export const post = (url, data = {}, options = {}) => {
     options = {
         method: 'POST',
         body: request
-    };
-
-    const headers = {
-        'content-type': 'application/json',
-        'accept': 'application/json'
     };
 
     return fetch(url, { ...options, headers })
@@ -23,8 +26,15 @@ export const post = (url, data = {}, options = {}) => {
 }
 
 export const get = (url, data = {}, options = {}) => {
-    console.log(`get url for get request: ${url}`);
-    return requests;
+    options = {
+        method: 'GET'
+    };
+    
+    return fetch(url, { ...options, headers })
+        .then(response => console.log(response))
+        .catch((error) => {
+            throw error;
+        });
 }
 
 const createRequest = (data) => {

@@ -14,12 +14,13 @@ class Requests extends React.Component {
 
     constructor(props) {
         super(props);
-        //this.getTableData();
+        this.getTableData();
     };
 
-    // getTableData = () => {
-    //     let requests = getRequests({});
-    // };
+    getTableData = () => {
+        const requests = getRequests({});
+        debugger;
+    };
 
     render() {
         const { classes, tableData } = this.props;

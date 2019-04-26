@@ -1,8 +1,8 @@
 import { GET_REQUESTS } from '../actions/action-types';
-import { get } from '../api/api';
+import { GET_REQUESTS_URL, get } from '../api/api';
 
 export const getRequests = (params) => {
-    let requests = get(params);
+    let requests = get(GET_REQUESTS_URL, params);
     return {
         type: GET_REQUESTS,
         payload: requests
