@@ -1,7 +1,7 @@
 import { API_URL } from '../config';
 
-export const CREATE_REQUEST_URL = `${API_URL}/api/create-request`;
-export const GET_REQUESTS_URL = `${API_URL}/api/get-requests`;
+export const CREATE_EVENT_URL = `${API_URL}/api/event`;
+export const GET_EVENTS_URL = `${API_URL}/api/event`;
 
 
 const headers = {
@@ -12,10 +12,10 @@ const headers = {
 
 export const post = (url, data = {}, options = {}) => {
 
-    const request = JSON.stringify(createRequest(data));
+    const event = JSON.stringify(createEvent(data));
     options = {
         method: 'POST',
-        body: request
+        body: event
     };
 
     return fetch(url, { ...options, headers })
@@ -37,7 +37,7 @@ export const get = (url, data = {}, options = {}) => {
         });
 }
 
-const createRequest = (data) => {
+const createEvent = (data) => {
     return {
         fio: data.fio,
         date: Date.now(),

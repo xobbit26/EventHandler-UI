@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { Button, withStyles, Grid, TextField, List, ListItem } from '@material-ui/core';
 import senderStyles from './sender-style';
-import { sendRequest } from '../../actions/sender.actions';
+import { sendEvent } from '../../actions/sender.actions';
 import { getFioState, getDepartmentState, getDescriptionState } from '../../reducers/sender.reducer';
 
 const inputParams = [
@@ -58,7 +58,7 @@ class Sender extends Component {
 
     //find out how to do it better (through state or props)
     onSend = () => {
-        this.props.sendRequest(this.state);
+        this.props.sendEvent(this.state);
     };
 
 
@@ -94,7 +94,7 @@ function mapStateToProps(state) {
 };
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ sendRequest: sendRequest }, dispatch);
+    return bindActionCreators({ sendEvent: sendEvent }, dispatch);
 };
 
 export default connect(mapStateToProps, matchDispatchToProps)(withStyles(senderStyles)(Sender));

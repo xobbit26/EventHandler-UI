@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles, Table, TablePagination } from '@material-ui/core/';
-import TableHeader from './requests-table-header';
-import TableBody from './requests-table-body';
+import TableHeader from './events-table-header';
+import TableBody from './events-table-body';
 import tableStyles from './table-styles';
 
 const tableColumns = [
@@ -13,7 +13,7 @@ const tableColumns = [
     { id: 'resolve-date', numeric: false, disablePadding: false, label: 'Дата и время выполнения' },
 ];
 
-class RequestsTable extends Component {
+class EventsTable extends Component {
 
     constructor(props) {
         super(props);
@@ -89,4 +89,4 @@ class RequestsTable extends Component {
     }
 }
 
-export default withStyles(tableStyles)(RequestsTable)
+export default withStyles(tableStyles)(EventsTable)

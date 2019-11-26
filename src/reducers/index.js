@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import Requests from './requests.reducer';
+import Events from './events.reducer';
 import Sender from './sender.reducer';
 
 const allReducers = combineReducers({
-    requests: Requests,
+    events: Events,
     sender: Sender
 });
 

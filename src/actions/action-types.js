@@ -1,2 +1,2 @@
-export const CREATE_REQUEST = 'CREATE_REQUEST';
-export const GET_REQUESTS = 'GET_REQUESTS';
+export const CREATE_EVENT = 'CREATE_EVENT';
+export const GET_EVENTS = 'GET_EVENTS';

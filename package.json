@@ -1,23 +1,23 @@
 {
-  "name": "requestcontroller-ui",
+  "name": "event-handler-ui",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "webpack-dev-server",
-    "build": "webpack -p"
+    "build": "webpack --env.NODE_ENV=development --progress",
+    "build:production": "webpack --env.NODE_ENV=production --progress",
+    "start": "webpack-dev-server --env.NODE_ENV=development --env.develop --progress"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xobbit26/RequestController-UI.git"
+    "url": "git+https://github.com/xobbit26/EventHandler-UI.git"
   },
   "author": "Stanislav Naravetskas",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/xobbit26/RequestController-UI/issues"
+    "url": "https://github.com/xobbit26/EventHandler-UI/issues"
   },
-  "homepage": "https://github.com/xobbit26/RequestController-UI#readme",
+  "homepage": "https://github.com/xobbit26/EventHandler-UI#readme",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
@@ -36,10 +36,11 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.1",
+    "html-webpack-plugin": "^3.2.0",
     "json-loader": "^0.5.7",
     "less-loader": "^4.1.0",
     "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.1.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",

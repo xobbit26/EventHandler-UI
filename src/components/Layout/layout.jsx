@@ -21,13 +21,13 @@ import Login from '../login/login';
 import Administration from '../administration/administration';
 import Settings from '../settings/settings';
 import Reports from '../Reports/reports';
-import Requests from '../requests/requests';
+import Events from '../events/events';
 import NotFound_404 from '../404NotFound/404notFound';
 
 import layoutStyles from './layout-styles';
 
 const menuListItemsParams = [
-    { key: 'requests', name: 'Список заявок', url: '/requests', icon: <ViewListIcon /> },
+    { key: 'events', name: 'Список заявок', url: '/events', icon: <ViewListIcon /> },
     { key: 'reports', name: 'Отчеты', url: '/reports', icon: <AssessmentIcon /> },
     { key: 'administration', name: 'Админка', url: '/administration', icon: <AccountCircleIcon /> },
     { key: 'settings', name: 'Настройки', url: '/settings', icon: <SettingIcon /> }
@@ -120,7 +120,7 @@ class Layout extends Component {
                         }
                         <Route path="/settings" component={Settings} />
                         <Route path="/reports" component={Reports} />
-                        <Route path="/requests" component={Requests} />
+                        <Route path="/events" component={Events} />
                         <Route path="*" component={NotFound_404} />
                     </Switch>
                 </main>
