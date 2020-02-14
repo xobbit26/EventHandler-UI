@@ -12,10 +12,10 @@ const headers = {
 
 export const post = (url, data = {}, options = {}) => {
 
-    const event = JSON.stringify(createEvent(data));
+    const jsonData = JSON.stringify(data);
     options = {
         method: 'POST',
-        body: event
+        body: jsonData
     };
 
     return fetch(url, { ...options, headers })
@@ -35,16 +35,4 @@ export const get = (url, data = {}, options = {}) => {
         .catch((error) => {
             throw error;
         });
-}
-
-const createEvent = (data) => {
-    return {
-        fio: data.fio,
-        date: Date.now(),
-        department: data.department,
-        description: data.description,
-        responsible: "",
-        status: "В очереди",
-        resolveDate: ""
-    };
 }

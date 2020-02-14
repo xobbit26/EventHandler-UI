@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { requestEvents } from '../../actions/events.actions';
+//import { requestEvents } from '../../actions/events.actions';
 import PropTypes from 'prop-types';
 import { getEventsState } from '../../reducers/events.reducer';
 import Grid from '../../components/grid/grid';
@@ -16,7 +16,7 @@ class Events extends React.Component {
     };
 
     componentDidMount() {
-        requestEvents(this.props.dispatch);
+        //requestEvents(this.props.dispatch);
     }
 
     render() {

@@ -2,74 +2,74 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Button, withStyles, Grid, TextField, List, ListItem } from '@material-ui/core';
-import senderStyles from './sender-style';
+import Input from '../../components/input/input.jsx';
+import { Button, withStyles, Grid, List, ListItem } from '@material-ui/core';
 import { sendEvent } from '../../actions/sender.actions';
-import { getApplicantState, getApplicantDepartmentState, getDescriptionState } from '../../reducers/sender.reducer';
-
-const inputParams = [
-    { id: 'applicant', label: 'ФИО отправителя', multiline: false },
-    { id: 'applicantDepartment', label: 'Отдел', multiline: false },
-    { id: 'description', label: 'Описание', multiline: true, rows: 10 }
-];
-
-class Inputs extends Component {
-    constructor(props) {
-        super(props);
-    };
-
-    render() {
-
-        return (
-            <div>
-                {inputParams.map((item) => {
-                    return (
-                        <ListItem key={item.id}>
-                            <TextField
-                                id={item.id}
-                                label={item.label}
-                                style={{ width: '100%' }}
-                                variant="outlined"
-                                margin="normal"
-                                InputLabelProps={{ shrink: true }}
-                                multiline={item.multiline}
-                                rows={item.rows}
-                                onChange={(event) => this.props.handleChange(event)}
-                            />
-                        </ListItem>
-                    );
-                })}
-            </div>
-        )
-    };
-};
+import senderStyles from './sender-style';
 
 class Sender extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            applicant: '',
+            applicantDepartment: '',
+            description: ''
+        }
+
+        this.getInputParams = this.getInputParams.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.onSend = this.onSend.bind(this);
+        this.clearState = this.clearState.bind(this);
     };
 
-    handleChange = (event) => {
+    getInputParams() {
+        return [
+            { id: 'applicant', label: 'ФИО отправителя', multiline: false },
+            { id: 'applicantDepartment', label: 'Отдел', multiline: false },
+            { id: 'description', label: 'Описание', multiline: true, rows: 10 }
+        ]
+    }
+
+    handleChange(event) {
         const { id, value } = event.target;
         this.setState({ [id]: value });
     };
 
-
-    //find out how to do it better (through state or props)
-    onSend = () => {
+    onSend() {
         this.props.sendEvent(this.state);
+        this.clearState();
     };
 
+    clearState() {
+        this.setState({
+            applicant: '',
+            applicantDepartment: '',
+            description: ''
+        });
+    }
 
     render() {
         const { classes } = this.props;
         return (
             <Grid container justify="center">
                 <List className={classes.list}>
-                    <Inputs handleChange={this.handleChange} />
+
+                    {this.getInputParams().map((item) => {
+                        return (<Input key={item.id}
+                            id={item.id}
+                            handleChange={this.handleChange}
+                            label={item.label}
+                            value={this.state[item.id]}
+                            multiline={item.multiline}
+                            rows={item.rows} />)
+                    })}
+
                     <ListItem alignItems="center">
-                        <Button variant="contained" color="secondary" onClick={this.onSend}>
+                        <Button variant="contained"
+                            color="secondary"
+                            onClick={this.onSend}>
                             Отправить
                         </Button>
                     </ListItem>
@@ -80,20 +80,13 @@ class Sender extends Component {
 };
 
 Sender.propTypes = {
-    applicant: PropTypes.string,
-    applicantDepartment: PropTypes.string,
-    description: PropTypes.string
-}
-
-function mapStateToProps(state) {
-    return {
-        applicant: getApplicantState(state),
-        applicantDepartment: getApplicantDepartmentState(state),
-        description: getDescriptionState(state)
-    };
+    dispatch: PropTypes.func
 };
 
-function matchDispatchToProps(dispatch) {
+const mapStateToProps = (state) => ({
+});
+
+const matchDispatchToProps = (dispatch) => {
     return bindActionCreators({ sendEvent: sendEvent }, dispatch);
 };
 
