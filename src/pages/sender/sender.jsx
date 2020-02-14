@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { Button, withStyles, Grid, TextField, List, ListItem } from '@material-ui/core';
 import senderStyles from './sender-style';
 import { sendEvent } from '../../actions/sender.actions';
-import { getFioState, getDepartmentState, getDescriptionState } from '../../reducers/sender.reducer';
+import { getApplicantState, getApplicantDepartmentState, getDescriptionState } from '../../reducers/sender.reducer';
 
 const inputParams = [
-    { id: 'fio', label: 'ФИО отправителя', multiline: false },
-    { id: 'department', label: 'Отдел', multiline: false },
+    { id: 'applicant', label: 'ФИО отправителя', multiline: false },
+    { id: 'applicantDepartment', label: 'Отдел', multiline: false },
     { id: 'description', label: 'Описание', multiline: true, rows: 10 }
 ];
 
@@ -80,15 +80,15 @@ class Sender extends Component {
 };
 
 Sender.propTypes = {
-    fio: PropTypes.string,
-    department: PropTypes.string,
+    applicant: PropTypes.string,
+    applicantDepartment: PropTypes.string,
     description: PropTypes.string
 }
 
 function mapStateToProps(state) {
     return {
-        fio: getFioState(state),
-        department: getDepartmentState(state),
+        applicant: getApplicantState(state),
+        applicantDepartment: getApplicantDepartmentState(state),
         description: getDescriptionState(state)
     };
 };

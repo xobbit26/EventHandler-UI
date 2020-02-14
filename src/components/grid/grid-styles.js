@@ -1,4 +1,4 @@
-const tableStyles = theme => ({
+const gridStyles = theme => ({
     table: {
         minWidth: 1020,
     },
@@ -7,5 +7,4 @@ const tableStyles = theme => ({
     },
 });
 
-export default tableStyles;
-
+export default gridStyles;

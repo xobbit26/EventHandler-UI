@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@material-ui/core/';
 
 
-class TableHeader extends Component {
+class GridHeader extends Component {
 
     constructor(props) {
         super(props);
@@ -51,4 +51,4 @@ class TableHeader extends Component {
     }
 }
 
-export default TableHeader;
+export default GridHeader;

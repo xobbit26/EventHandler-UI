@@ -25,7 +25,7 @@ function desc(a, b, orderBy) {
     return 0;
 }
 
-class Body extends Component {
+class GridBody extends Component {
 
     constructor(props) {
         super(props);
@@ -35,7 +35,6 @@ class Body extends Component {
 
         const { handleClick } = this.props.options;
         const { data, order, orderBy, rowsPerPage, page } = this.props.tableState;
-
         return (
             <TableBody>
                 {stableSort(data, getSorting(order, orderBy))
@@ -48,12 +47,12 @@ class Body extends Component {
                                 tabIndex={-1}
                                 key={n.id}
                             >
-                                <TableCell>{n.fio}</TableCell>
-                                <TableCell align="left">{n.date}</TableCell>
+                                <TableCell>{n.applicant}</TableCell>
+                                <TableCell align="left">{n.applyDateTime}</TableCell>
                                 <TableCell align="left">{n.description}</TableCell>
                                 <TableCell align="left">{n.responsible}</TableCell>
-                                <TableCell align="left">{n.status}</TableCell>
-                                <TableCell align="left">{n.resolveDate}</TableCell>
+                                <TableCell align="left">{n.eventStatusName}</TableCell>
+                                <TableCell align="left">{n.resolveDateTime}</TableCell>
                             </TableRow>
                         );
                     })}
@@ -62,4 +61,4 @@ class Body extends Component {
     }
 }
 
-export default Body;
+export default GridBody;

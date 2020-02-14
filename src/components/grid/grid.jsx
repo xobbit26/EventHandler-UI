@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
 import { withStyles, Table, TablePagination } from '@material-ui/core/';
-import TableHeader from './events-table-header';
-import TableBody from './events-table-body';
-import tableStyles from './table-styles';
+import tableStyles from './grid-styles';
+import GridHeader from './grid-header';
+import GridBody from './grid-body';
 
 const tableColumns = [
-    { id: 'fio', numeric: false, disablePadding: false, label: 'ФИО подавшего заявку' },
-    { id: 'date', numeric: false, disablePadding: false, label: 'Дата и время подачи' },
+    { id: 'applicant', numeric: false, disablePadding: false, label: 'ФИО подавшего заявку' },
+    { id: 'applyDateTime', numeric: false, disablePadding: false, label: 'Дата и время подачи' },
     { id: 'descripton', numeric: false, disablePadding: false, label: 'Описание' },
     { id: 'responsible', numeric: false, disablePadding: false, label: 'Ответственный' },
-    { id: 'status', numeric: false, disablePadding: false, label: 'Статус' },
-    { id: 'resolve-date', numeric: false, disablePadding: false, label: 'Дата и время выполнения' },
+    { id: 'eventStatusName', numeric: false, disablePadding: false, label: 'Статус' },
+    { id: 'resolveDateTime', numeric: false, disablePadding: false, label: 'Дата и время выполнения' },
 ];
 
-class EventsTable extends Component {
+class Grid extends Component {
 
     constructor(props) {
         super(props);
-        
         this.state = {
             columns: tableColumns,
             order: 'asc',
-            orderBy: 'fio',
+            orderBy: 'applicant',
             data: this.props.tableData,
             page: 0,
             rowsPerPage: 10
@@ -52,7 +51,7 @@ class EventsTable extends Component {
     };
 
     render() {
-        const { tableData, classes } = this.props;
+        const { classes } = this.props;
 
         const headerOptions = {
             onRequestSort: this.handleRequestSort
@@ -65,8 +64,8 @@ class EventsTable extends Component {
         return (
             <div className={classes.tableWrapper}>
                 <Table className={classes.table} aria-labelledby="tableTitle">
-                    <TableHeader tableState={this.state} options={headerOptions} />
-                    <TableBody tableState={this.state} options={bodyOptions} />
+                    <GridHeader tableState={this.state} options={headerOptions} />
+                    <GridBody tableState={this.state} options={bodyOptions} />
                 </Table>
                 {/* <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
@@ -89,4 +88,4 @@ class EventsTable extends Component {
     }
 }
 
-export default withStyles(tableStyles)(EventsTable)
+export default withStyles(tableStyles)(Grid)

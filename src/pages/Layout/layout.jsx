@@ -18,9 +18,9 @@ import {
 import classNames from 'classnames';
 import Sender from '../sender/sender';
 import Login from '../login/login';
-import Administration from '../administration/administration';
+import Administration from '../../pages/administration/administration';
 import Settings from '../settings/settings';
-import Reports from '../Reports/reports';
+import Reports from '../reports/reports';
 import Events from '../events/events';
 import NotFound_404 from '../404NotFound/404notFound';
 
