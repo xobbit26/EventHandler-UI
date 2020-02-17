@@ -5,13 +5,15 @@ import {
     withStyles, AppBar, Toolbar, Typography,
     Button, IconButton, CssBaseline, Drawer,
     Divider, List, ListItem, ListItemIcon, ListItemText,
-
 } from '@material-ui/core/';
 
 import {
-    Menu as MenuIcon, Settings as SettingIcon,
-    AccountCircle as AccountCircleIcon, Assessment as AssessmentIcon,
-    ViewList as ViewListIcon, ChevronLeft as ChevronLeftIcon,
+    Menu as MenuIcon,
+    Settings as SettingIcon,
+    AccountCircle as AccountCircleIcon,
+    Assessment as AssessmentIcon,
+    ViewList as ViewListIcon,
+    ChevronLeft as ChevronLeftIcon,
     ChevronRight as ChevronRightIcon
 } from '@material-ui/icons/';
 

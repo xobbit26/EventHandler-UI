@@ -6,9 +6,9 @@ import { HashRouter as Router } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles/';
 import mainTheme from '../src/styles/mainTheme';
 import App from '../src/App/App';
-import allReducers from './reducers/allReducers';
+import rootReducer from './store/rootReducer';
 
-const store = createStore(allReducers);
+const store = createStore(rootReducer);
 
 ReactDOM.render(
     <Provider store={store}>

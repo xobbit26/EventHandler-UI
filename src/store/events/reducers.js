@@ -1,11 +1,11 @@
 import { fromJS } from 'immutable';
-import { GET_EVENTS } from '../actions/action-types';
+import { GET_EVENTS } from '../actions';
 
 const initialState = fromJS({
     events: []
 });
 
-const events = (state = initialState, action) => {
+const eventsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_EVENTS:
             return state.merge({ tableData: action.payload });
@@ -16,4 +16,4 @@ const events = (state = initialState, action) => {
 
 export const getEventsState = (state) => state.events.get('events');
 
-export default events;
+export default eventsReducer;

@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 //import { requestEvents } from '../../actions/events.actions';
 import PropTypes from 'prop-types';
-import { getEventsState } from '../../reducers/events.reducer';
+import { getEventsState } from '../../store/events/reducers';
 import Grid from '../../components/grid/grid';
 
 import eventListStyles from './events-styles';

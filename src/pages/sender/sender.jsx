@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Input from '../../components/input/input.jsx';
 import { Button, withStyles, Grid, List, ListItem } from '@material-ui/core';
-import { sendEvent } from '../../actions/sender.actions';
+import { sendEvent } from '../../store/sender/actions';
 import senderStyles from './sender-style';
 
 class Sender extends Component {
@@ -86,8 +85,8 @@ Sender.propTypes = {
 const mapStateToProps = (state) => ({
 });
 
-const matchDispatchToProps = (dispatch) => {
-    return bindActionCreators({ sendEvent: sendEvent }, dispatch);
-};
+const matchDispatchToProps = {
+    sendEvent
+}
 
 export default connect(mapStateToProps, matchDispatchToProps)(withStyles(senderStyles)(Sender));
