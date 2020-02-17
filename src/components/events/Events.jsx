@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 //import { requestEvents } from '../../actions/events.actions';
 import PropTypes from 'prop-types';
 import { getEventsState } from '../../store/events/reducers';
-import Grid from '../../components/grid/grid';
+import Grid from '../../sharedComponents/grid/Grid';
 
 import eventListStyles from './events-styles';
 

@@ -18,42 +18,47 @@ import {
 } from '@material-ui/icons/';
 
 import classNames from 'classnames';
-import Sender from '../sender/sender';
-import Login from '../login/login';
-import Administration from '../../pages/administration/administration';
-import Settings from '../settings/settings';
-import Reports from '../reports/reports';
-import Events from '../events/events';
+import Sender from '../sender/Sender';
+import Login from '../login/Login';
+import Administration from '../administration/Administration';
+import Settings from '../settings/Settings';
+import Reports from '../reports/Reports';
+import Events from '../events/Events';
 import NotFound_404 from '../404NotFound/404notFound';
 
 import layoutStyles from './layout-styles';
 
-const menuListItemsParams = [
-    { key: 'events', name: 'Список заявок', url: '/events', icon: <ViewListIcon /> },
-    { key: 'reports', name: 'Отчеты', url: '/reports', icon: <AssessmentIcon /> },
-    { key: 'administration', name: 'Админка', url: '/administration', icon: <AccountCircleIcon /> },
-    { key: 'settings', name: 'Настройки', url: '/settings', icon: <SettingIcon /> }
-];
-
 class Layout extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            openMenuBar: false
+        };
+
+        this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+        this.handleDrawerClose = this.handleDrawerClose.bind(this);
     }
 
-    state = {
-        open: false
+    handleDrawerOpen() {
+        this.setState({ openMenuBar: true });
     };
 
-    handleDrawerOpen = () => {
-        this.setState({ open: true });
+    handleDrawerClose() {
+        this.setState({ openMenuBar: false });
     };
 
-    handleDrawerClose = () => {
-        this.setState({ open: false });
-    };
+    getMenuListItemsParams() {
+        return [
+            { key: 'events', name: 'Список заявок', url: '/events', icon: <ViewListIcon /> },
+            { key: 'reports', name: 'Отчеты', url: '/reports', icon: <AssessmentIcon /> },
+            { key: 'administration', name: 'Админка', url: '/administration', icon: <AccountCircleIcon /> },
+            { key: 'settings', name: 'Настройки', url: '/settings', icon: <SettingIcon /> }
+        ];
+    }
 
     getMenuListItems() {
-        const menuElementList = menuListItemsParams.map((item) => {
+        const menuElementList = this.getMenuListItemsParams().map((item) => {
             return (
                 <ListItem button key={item.key} component={Link} to={item.url}>
                     <ListItemIcon>{item.icon}</ListItemIcon>
@@ -66,20 +71,20 @@ class Layout extends Component {
 
     render() {
         const { classes, theme, isAuthentificated } = this.props;
-        const { open } = this.state;
+        const { openMenuBar } = this.state;
 
         return (
             <div className={classes.root}>
                 <CssBaseline />
-                <AppBar position="fixed" className={classNames(classes.appBar, { [classes.appBarShift]: open, })}>
-                    <Toolbar disableGutters={!open}>
+                <AppBar position="fixed" className={classNames(classes.appBar, { [classes.appBarShift]: openMenuBar, })}>
+                    <Toolbar disableGutters={!openMenuBar}>
 
                         {isAuthentificated &&
                             <IconButton
                                 color="inherit"
                                 aria-label="Open drawer"
                                 onClick={this.handleDrawerOpen}
-                                className={classNames(classes.menuButton, open && classes.hide)}
+                                className={classNames(classes.menuButton, openMenuBar && classes.hide)}
                             >
                                 <MenuIcon />
                             </IconButton>
@@ -92,7 +97,7 @@ class Layout extends Component {
                     className={classes.drawer}
                     variant="persistent"
                     anchor="left"
-                    open={open}
+                    open={openMenuBar}
                     classes={{
                         paper: classes.drawerPaper,
                     }}
@@ -110,7 +115,7 @@ class Layout extends Component {
 
                 <main
                     className={classNames(classes.content, {
-                        [classes.contentShift]: open,
+                        [classes.contentShift]: openMenuBar,
                     })}
                 >
                     <div className={classes.drawerHeader} />

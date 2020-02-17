@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Input from '../../components/input/input.jsx';
+import Input from '../../sharedComponents/input/input.jsx';
 import { Button, withStyles, Grid, List, ListItem } from '@material-ui/core';
 import { sendEvent } from '../../store/sender/actions';
 import senderStyles from './sender-style';

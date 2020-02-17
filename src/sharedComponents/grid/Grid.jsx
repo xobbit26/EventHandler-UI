@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles, Table, TablePagination } from '@material-ui/core/';
 import tableStyles from './grid-styles';
-import GridHeader from './grid-header';
-import GridBody from './grid-body';
+import GridHeader from './GridHeader';
+import GridBody from './GridBody';
 
 const tableColumns = [
     { id: 'applicant', numeric: false, disablePadding: false, label: 'ФИО подавшего заявку' },

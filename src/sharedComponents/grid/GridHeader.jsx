@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { TableCell, TableHead, TableRow, TableSortLabel, Tooltip } from '@material-ui/core/';
-
+import {
+    TableCell,
+    TableHead,
+    TableRow,
+    TableSortLabel,
+    Tooltip
+} from '@material-ui/core/';
 
 class GridHeader extends Component {
 

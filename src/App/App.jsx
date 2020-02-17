@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
-import Layout from '../pages/Layout/layout';
-
+import Layout from '../components/layout/Layout';
 
 class App extends Component {
     constructor(props) {
         super(props);
-    
-        //this.checkForAuthentification();
-        //this.checkBackendAvailability();
+
+        this.state = {
+            isAuthentificated: false,
+            isBackendAvailable: true,
+        };
+
+        this.checkForAuthentification = this.checkForAuthentification.bind(this);
+        this.checkBackendAvailability = this.checkBackendAvailability.bind(this);
     }
 
-    state = {
-        isAuthentificated: true,
-        isBackendAvailable: true,
-    };
+    componentDidMount() {
+        this.checkForAuthentification();
+        this.checkBackendAvailability();
+    }
 
-    //TODO: Find out whats wrong with it
-    // checkForAuthentification() {
-    //     this.setState({ isAuthentificated: true });
-    // }
+    checkForAuthentification() {
+        //immitation of server request
+        //TODO: in future add server request
+        setTimeout(() => {
+            this.setState({ isAuthentificated: true });
+        }, 2000);
+    }
 
-    //TODO: Find out whats wrong with it
-    //checkBackendAvailability(){this.setState({ isBackendAvailable: true });}
-
+    checkBackendAvailability() {
+        //immitation of server request
+        //TODO: in future add server request
+        setTimeout(() => {
+            this.setState({ isBackendAvailable: true });
+        }, 3000);
+    }
 
     render() {
 
@@ -40,7 +51,7 @@ class App extends Component {
                         Backend is not available
                     </React.Fragment>
                 }
-                
+
             </React.Fragment>
         );
     }
