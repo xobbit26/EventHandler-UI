@@ -39,6 +39,7 @@
     "html-webpack-plugin": "^3.2.0",
     "json-loader": "^0.5.7",
     "less-loader": "^4.1.0",
+    "redux-logger": "^3.0.6",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^1.1.2",
