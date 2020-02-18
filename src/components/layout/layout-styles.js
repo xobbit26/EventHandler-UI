@@ -1,4 +1,3 @@
-const drawerWidth = 240;
 const layoutStyles = theme => ({
     root: {
         display: 'flex',
@@ -12,7 +11,7 @@ const layoutStyles = theme => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        marginLeft: -drawerWidth,
+        marginLeft: -theme.drawerWidth,
     },
 
     contentShift: {
@@ -22,7 +21,7 @@ const layoutStyles = theme => ({
         }),
         marginLeft: 0,
     },
-    
+
     drawerHeader: {
         display: 'flex',
         alignItems: 'center',

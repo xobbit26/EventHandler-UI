@@ -14,9 +14,12 @@ const theme = createMuiTheme({
             dark: '#00a152',
         }
     },
+
     typography: {
         useNextVariants: true,
     },
+
+    drawerWidth: 240
 });
 
 export default theme;

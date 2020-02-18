@@ -1,13 +1,12 @@
-const drawerWidth = 240;
 const sideBarStyles = theme => ({
 
     drawer: {
-        width: drawerWidth,
+        width: theme.drawerWidth,
         flexShrink: 0,
     },
 
     drawerPaper: {
-        width: drawerWidth,
+        width: theme.drawerWidth,
     },
     
     drawerHeader: {
