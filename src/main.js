@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { HashRouter as Router } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles/';
 import mainTheme from '../src/styles/mainTheme';
-import App from './app/App';
+import App from './App';
 import rootReducer from './store/rootReducer';
 
 const store = createStore(rootReducer);

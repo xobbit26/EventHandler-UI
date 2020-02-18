@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import ApplicationBar from '../appMenu/applicationBar/ApplicationBar';
+import SideBar from '../appMenu/sideBar/SideBar';
 
-import {
-    withStyles, AppBar, Toolbar, Typography,
-    Button, IconButton, CssBaseline, Drawer,
-    Divider, List, ListItem, ListItemIcon, ListItemText,
-} from '@material-ui/core/';
-
-import {
-    Menu as MenuIcon,
-    Settings as SettingIcon,
-    AccountCircle as AccountCircleIcon,
-    Assessment as AssessmentIcon,
-    ViewList as ViewListIcon,
-    ChevronLeft as ChevronLeftIcon,
-    ChevronRight as ChevronRightIcon
-} from '@material-ui/icons/';
+import { withStyles } from '@material-ui/core/';
 
 import classNames from 'classnames';
 import Sender from '../sender/Sender';
@@ -33,7 +21,7 @@ class Layout extends Component {
         super(props);
 
         this.state = {
-            openMenuBar: false
+            isOpenMenuBar: false
         };
 
         this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
@@ -41,81 +29,33 @@ class Layout extends Component {
     }
 
     handleDrawerOpen() {
-        this.setState({ openMenuBar: true });
+        this.setState({ isOpenMenuBar: true });
     };
 
     handleDrawerClose() {
-        this.setState({ openMenuBar: false });
-    };
-
-    getMenuListItemsParams() {
-        return [
-            { key: 'events', name: 'Список заявок', url: '/events', icon: <ViewListIcon /> },
-            { key: 'reports', name: 'Отчеты', url: '/reports', icon: <AssessmentIcon /> },
-            { key: 'administration', name: 'Админка', url: '/administration', icon: <AccountCircleIcon /> },
-            { key: 'settings', name: 'Настройки', url: '/settings', icon: <SettingIcon /> }
-        ];
-    }
-
-    getMenuListItems() {
-        const menuElementList = this.getMenuListItemsParams().map((item) => {
-            return (
-                <ListItem button key={item.key} component={Link} to={item.url}>
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.name} />
-                </ListItem>
-            );
-        })
-        return menuElementList;
+        this.setState({ isOpenMenuBar: false });
     };
 
     render() {
-        const { classes, theme, isAuthentificated } = this.props;
-        const { openMenuBar } = this.state;
+        const { classes, isAuthentificated } = this.props;
+        const { isOpenMenuBar } = this.state;
 
         return (
             <div className={classes.root}>
-                <CssBaseline />
-                <AppBar position="fixed" className={classNames(classes.appBar, { [classes.appBarShift]: openMenuBar, })}>
-                    <Toolbar disableGutters={!openMenuBar}>
 
-                        {isAuthentificated &&
-                            <IconButton
-                                color="inherit"
-                                aria-label="Open drawer"
-                                onClick={this.handleDrawerOpen}
-                                className={classNames(classes.menuButton, openMenuBar && classes.hide)}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                        }
-                        <Typography className={classes.grow} variant="h6" color="inherit" component={Link} to="/">RC</Typography>
-                        <Button color="inherit" href="#/login" className={classes.loginButton}>Login</Button>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    className={classes.drawer}
-                    variant="persistent"
-                    anchor="left"
-                    open={openMenuBar}
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                >
-                    <div className={classes.drawerHeader}>
-                        <IconButton onClick={this.handleDrawerClose}>
-                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <List>
-                        {this.getMenuListItems()}
-                    </List>
-                </Drawer>
+                <ApplicationBar
+                    isOpenMenuBar={isOpenMenuBar}
+                    isAuthentificated={isAuthentificated}
+                    handleDrawerOpen={this.handleDrawerOpen}
+                />
+
+                <SideBar
+                    isOpenMenuBar={isOpenMenuBar}
+                    handleDrawerClose={this.handleDrawerClose} />
 
                 <main
                     className={classNames(classes.content, {
-                        [classes.contentShift]: openMenuBar,
+                        [classes.contentShift]: isOpenMenuBar,
                     })}
                 >
                     <div className={classes.drawerHeader} />
