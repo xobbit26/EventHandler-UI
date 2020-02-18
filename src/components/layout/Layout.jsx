@@ -34,14 +34,16 @@ class Layout extends Component {
                 >
                     <div className={classes.drawerHeader} />
                     <Switch>
-                        <Route exact path="/" component={Sender} />
+                        
+                        <Route exact path="/" component={Events} />
                         <Route path="/login" component={Login} />
                         {isUserAuthenticated &&
                             <Route path="/administration" component={Administration} />
                         }
+                        <Route path="/sender" component={Sender} />
+                        <Route path="/events" component={Events} />
                         <Route path="/settings" component={Settings} />
                         <Route path="/reports" component={Reports} />
-                        <Route path="/events" component={Events} />
                         <Route path="*" component={NotFound_404} />
                     </Switch>
                 </main>

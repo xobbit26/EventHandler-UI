@@ -13,7 +13,8 @@ import {
     Assessment as AssessmentIcon,
     ViewList as ViewListIcon,
     ChevronLeft as ChevronLeftIcon,
-    ChevronRight as ChevronRightIcon
+    ChevronRight as ChevronRightIcon,
+    Add as AddIcon
 } from '@material-ui/icons/';
 
 import sideBarStyles from './side-bar-styles';
@@ -25,6 +26,7 @@ class SideBar extends Component {
 
     getMenuListItemsParams() {
         return [
+            { key: 'sender', name: 'Создать заявку', url: '/sender', icon: <AddIcon /> },
             { key: 'events', name: 'Список заявок', url: '/events', icon: <ViewListIcon /> },
             { key: 'reports', name: 'Отчеты', url: '/reports', icon: <AssessmentIcon /> },
             { key: 'administration', name: 'Админка', url: '/administration', icon: <AccountCircleIcon /> },
