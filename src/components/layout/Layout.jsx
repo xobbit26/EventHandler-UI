@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ApplicationBar from '../appMenu/applicationBar/ApplicationBar';
-import SideBar from '../appMenu/sideBar/SideBar';
+import AppMenu from '../appMenu/AppMenu';
 import Sender from '../sender/Sender';
 import Login from '../login/Login';
 import Administration from '../administration/Administration';
@@ -19,50 +18,25 @@ import layoutStyles from './layout-styles';
 class Layout extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            isOpenMenuBar: false
-        };
-
-        this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
-        this.handleDrawerClose = this.handleDrawerClose.bind(this);
     }
 
-    handleDrawerOpen() {
-        this.setState({ isOpenMenuBar: true });
-    };
-
-    handleDrawerClose() {
-        this.setState({ isOpenMenuBar: false });
-    };
-
     render() {
-        const { classes, isAuthentificated } = this.props;
-        const { isOpenMenuBar } = this.state;
+        const { classes, isUserAuthenticated, isOpenSideBar } = this.props;
 
         return (
             <div className={classes.root}>
-
-                <ApplicationBar
-                    isOpenMenuBar={isOpenMenuBar}
-                    isAuthentificated={isAuthentificated}
-                    handleDrawerOpen={this.handleDrawerOpen}
-                />
-
-                <SideBar
-                    isOpenMenuBar={isOpenMenuBar}
-                    handleDrawerClose={this.handleDrawerClose} />
+                <AppMenu />
 
                 <main
                     className={classNames(classes.content, {
-                        [classes.contentShift]: isOpenMenuBar,
+                        [classes.contentShift]: isOpenSideBar,
                     })}
                 >
                     <div className={classes.drawerHeader} />
                     <Switch>
                         <Route exact path="/" component={Sender} />
                         <Route path="/login" component={Login} />
-                        {isAuthentificated &&
+                        {isUserAuthenticated &&
                             <Route path="/administration" component={Administration} />
                         }
                         <Route path="/settings" component={Settings} />
@@ -77,12 +51,14 @@ class Layout extends Component {
 }
 
 Layout.propTypes = {
-    isUserAuthentificated: PropTypes.bool
+    isUserAuthenticated: PropTypes.bool,
+    isOpenSideBar: PropTypes.bool
 };
 
 const mapStateToProps = (state) => {
     return {
-        isUserAuthentificated: state.app.get('isUserAuthentificated')
+        isUserAuthentificated: state.app.get('isUserAuthentificated'),
+        isOpenSideBar: state.appMenu.get('isOpenSideBar')
     }
 }
 

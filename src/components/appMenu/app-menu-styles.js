@@ -1,4 +1,4 @@
-const applicationBarStyles = theme => ({
+const appMenuStyles = theme => ({
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
@@ -35,4 +35,4 @@ const applicationBarStyles = theme => ({
     },
 });
 
-export default applicationBarStyles;
+export default appMenuStyles;

@@ -45,21 +45,20 @@ class SideBar extends Component {
     };
 
     render() {
-
-        const { classes, theme, isOpenMenuBar, handleDrawerClose } = this.props;
+        const { classes, theme, isOpenSideBar, closeSideBar } = this.props;
 
         return (
             <Drawer
                 className={classes.drawer}
                 variant="persistent"
                 anchor="left"
-                open={isOpenMenuBar}
+                open={isOpenSideBar}
                 classes={{
                     paper: classes.drawerPaper,
                 }}
             >
                 <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={closeSideBar}>
                         {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
                 </div>
@@ -73,8 +72,8 @@ class SideBar extends Component {
 }
 
 SideBar.propTypes = {
-    isOpenMenuBar: PropTypes.bool,
-    handleDrawerClose: PropTypes.func
+    isOpenSideBar: PropTypes.bool,
+    closeSideBar: PropTypes.func
 }
 
 export default withStyles(sideBarStyles, { withTheme: true })(SideBar);
