@@ -1,60 +1,51 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Layout from './components/layout/Layout';
+import {
+    checkIsBackendAvailable,
+    checkIsUserAuthenticated
+} from './store/app/actions';
 
 class App extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            isAuthentificated: false,
-            isBackendAvailable: true,
-        };
-
-        this.checkForAuthentification = this.checkForAuthentification.bind(this);
-        this.checkBackendAvailability = this.checkBackendAvailability.bind(this);
     }
 
     componentDidMount() {
-        this.checkForAuthentification();
-        this.checkBackendAvailability();
-    }
-
-    checkForAuthentification() {
-        //immitation of server request
-        //TODO: in future add server request
-        setTimeout(() => {
-            this.setState({ isAuthentificated: true });
-        }, 2000);
-    }
-
-    checkBackendAvailability() {
-        //immitation of server request
-        //TODO: in future add server request
-        setTimeout(() => {
-            this.setState({ isBackendAvailable: true });
-        }, 3000);
+        this.props.checkIsBackendAvailable();
+        this.props.checkIsUserAuthenticated();
     }
 
     render() {
-
-        const { isAuthentificated, isBackendAvailable } = this.state;
-
+        const { isBackendAvailable } = this.props;
+        //TODO: add loader while server request
         return (
-            <React.Fragment>
-                {isBackendAvailable &&
+            <div>
+                {isBackendAvailable ?
                     <React.Fragment>
-                        <Layout isAuthentificated={isAuthentificated} />
+                        <Layout />
                     </React.Fragment>
+                    : <div>Backend is not available</div>
                 }
-                {!isBackendAvailable &&
-                    <React.Fragment>
-                        Backend is not available
-                    </React.Fragment>
-                }
-
-            </React.Fragment>
+            </div>
         );
     }
 }
 
-export default App;
+App.propTypes = {
+    isBackendAvailable: PropTypes.bool.isRequired
+}
+
+const mapStateToProps = (state) => {
+    return {
+        isBackendAvailable: state.app.get('isBackendAvailable')
+    }
+}
+
+const matchDispatchToProps = {
+    checkIsBackendAvailable,
+    checkIsUserAuthenticated
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(App);

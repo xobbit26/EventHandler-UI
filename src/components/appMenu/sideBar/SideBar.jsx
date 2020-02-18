@@ -16,7 +16,6 @@ import {
     ChevronRight as ChevronRightIcon
 } from '@material-ui/icons/';
 
-import classNames from 'classnames';
 import sideBarStyles from './side-bar-styles';
 
 class SideBar extends Component {

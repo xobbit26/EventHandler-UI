@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import ApplicationBar from '../appMenu/applicationBar/ApplicationBar';
 import SideBar from '../appMenu/sideBar/SideBar';
-
-import { withStyles } from '@material-ui/core/';
-
-import classNames from 'classnames';
 import Sender from '../sender/Sender';
 import Login from '../login/Login';
 import Administration from '../administration/Administration';
@@ -14,6 +12,8 @@ import Reports from '../reports/Reports';
 import Events from '../events/Events';
 import NotFound_404 from '../404NotFound/404notFound';
 
+import { withStyles } from '@material-ui/core/';
+import classNames from 'classnames';
 import layoutStyles from './layout-styles';
 
 class Layout extends Component {
@@ -76,4 +76,14 @@ class Layout extends Component {
     }
 }
 
-export default withStyles(layoutStyles, { withTheme: true })(Layout);
+Layout.propTypes = {
+    isUserAuthentificated: PropTypes.bool
+};
+
+const mapStateToProps = (state) => {
+    return {
+        isUserAuthentificated: state.app.get('isUserAuthentificated')
+    }
+}
+
+export default connect(mapStateToProps)(withStyles(layoutStyles, { withTheme: true })(Layout));
