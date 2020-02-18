@@ -38,7 +38,7 @@ class AppMenu extends Component {
                                 <MenuIcon />
                             </IconButton>
                         }
-                        <Typography className={classes.grow} variant="h6" color="inherit" component={Link} to="/">RC</Typography>
+                        <Typography className={classes.grow} variant="h6" color="inherit" component={Link} to="/">Event Handler</Typography>
                         <Button color="inherit" href="#/login" className={classes.loginButton}>Login</Button>
                     </Toolbar>
                 </AppBar>
