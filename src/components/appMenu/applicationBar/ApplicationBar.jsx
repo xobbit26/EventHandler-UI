@@ -48,8 +48,8 @@ class ApplicationBar extends Component {
 }
 
 ApplicationBar.propTypes = {
-    isOpenMenuBar: PropTypes.bool.isRequired,
-    isAuthentificated: PropTypes.bool.isRequired,
+    isOpenMenuBar: PropTypes.bool,
+    isAuthentificated: PropTypes.bool,
     handleDrawerOpen: PropTypes.func
 }
 

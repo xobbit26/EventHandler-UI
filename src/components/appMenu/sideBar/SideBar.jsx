@@ -73,7 +73,7 @@ class SideBar extends Component {
 }
 
 SideBar.propTypes = {
-    isOpenMenuBar: PropTypes.bool.isRequired,
+    isOpenMenuBar: PropTypes.bool,
     handleDrawerClose: PropTypes.func
 }
 
