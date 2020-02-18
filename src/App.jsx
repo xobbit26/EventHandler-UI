@@ -34,7 +34,9 @@ class App extends Component {
 }
 
 App.propTypes = {
-    isBackendAvailable: PropTypes.bool.isRequired
+    isBackendAvailable: PropTypes.bool,
+    checkIsBackendAvailable: PropTypes.func,
+    checkIsUserAuthenticated: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
