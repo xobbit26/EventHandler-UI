@@ -32,10 +32,8 @@ class Grid extends Component {
     onSort(event) {
         const columnId = event.target.id;
 
-        let order = 'desc';
-        if (this.state.sortBy === columnId && this.state.order === 'desc') {
-            order = 'asc';
-        }
+        const order = this.state.sortBy === columnId && this.state.order === 'desc'
+            ? 'asc' : 'desc';
 
         this.setState({ order, columnId });
     };

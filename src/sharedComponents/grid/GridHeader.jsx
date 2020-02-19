@@ -23,8 +23,6 @@ class GridHeader extends Component {
                     {columns.map(column => (
                         <TableCell
                             key={column.id}
-                            align={column.numeric ? 'right' : 'left'}
-                            padding={column.disablePadding ? 'none' : 'default'}
                             sortDirection={orderBy === column.id ? order : false}
                         >
                             <Tooltip

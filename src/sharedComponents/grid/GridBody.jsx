@@ -24,11 +24,11 @@ class GridBody extends Component {
                                 key={n.id}
                             >
                                 <TableCell>{n.applicant}</TableCell>
-                                <TableCell align="left">{n.applyDateTime}</TableCell>
-                                <TableCell align="left">{n.description}</TableCell>
-                                <TableCell align="left">{n.responsible}</TableCell>
-                                <TableCell align="left">{n.eventStatusName}</TableCell>
-                                <TableCell align="left">{n.resolveDateTime}</TableCell>
+                                <TableCell>{n.applyDateTime}</TableCell>
+                                <TableCell>{n.description}</TableCell>
+                                <TableCell>{n.responsible}</TableCell>
+                                <TableCell>{n.eventStatusName}</TableCell>
+                                <TableCell>{n.resolveDateTime}</TableCell>
                             </TableRow>
                         );
                     })}

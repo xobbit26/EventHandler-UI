@@ -17,12 +17,12 @@ class Events extends React.Component {
 
     getTableColumns() {
         return [
-            { id: 'applicant', numeric: false, disablePadding: false, label: 'ФИО подавшего заявку' },
-            { id: 'applyDateTime', numeric: false, disablePadding: false, label: 'Дата и время подачи' },
-            { id: 'descripton', numeric: false, disablePadding: false, label: 'Описание' },
-            { id: 'responsible', numeric: false, disablePadding: false, label: 'Ответственный' },
-            { id: 'eventStatusName', numeric: false, disablePadding: false, label: 'Статус' },
-            { id: 'resolveDateTime', numeric: false, disablePadding: false, label: 'Дата и время выполнения' },
+            { id: 'applicant', numeric: false, label: 'ФИО подавшего заявку' },
+            { id: 'applyDateTime', numeric: false, label: 'Дата и время подачи' },
+            { id: 'descripton', numeric: false, label: 'Описание' },
+            { id: 'responsible', numeric: false, label: 'Ответственный' },
+            { id: 'eventStatusName', numeric: false, label: 'Статус' },
+            { id: 'resolveDateTime', numeric: false, label: 'Дата и время выполнения' },
         ]
     };
 
