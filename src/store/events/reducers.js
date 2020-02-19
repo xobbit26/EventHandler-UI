@@ -1,5 +1,5 @@
-import { fromJS } from 'immutable';
-import { GET_EVENTS } from '../actions';
+import { fromJS, List } from 'immutable';
+import { REQUEST_EVENTS } from '../actions';
 
 const initialState = fromJS({
     events: []
@@ -7,13 +7,11 @@ const initialState = fromJS({
 
 const eventsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_EVENTS:
-            return state.merge({ tableData: action.payload });
+        case REQUEST_EVENTS:
+            return state.merge({ events: new List(action.payload) });
         default:
             return state;
     };
 };
-
-export const getEventsState = (state) => state.events.get('events');
 
 export default eventsReducer;

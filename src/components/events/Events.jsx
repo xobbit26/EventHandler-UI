@@ -2,10 +2,10 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-//import { requestEvents } from '../../actions/events.actions';
+import { requestEvents } from '../../store/events/actions';
 import PropTypes from 'prop-types';
-import { getEventsState } from '../../store/events/reducers';
 import Grid from '../../sharedComponents/grid/Grid';
+import { REQUEST_EVENTS_URL, api } from '../../api/api';
 
 import eventListStyles from './events-styles';
 
@@ -15,29 +15,52 @@ class Events extends React.Component {
         super(props);
     };
 
+    getTableColumns() {
+        return [
+            { id: 'applicant', numeric: false, disablePadding: false, label: 'ФИО подавшего заявку' },
+            { id: 'applyDateTime', numeric: false, disablePadding: false, label: 'Дата и время подачи' },
+            { id: 'descripton', numeric: false, disablePadding: false, label: 'Описание' },
+            { id: 'responsible', numeric: false, disablePadding: false, label: 'Ответственный' },
+            { id: 'eventStatusName', numeric: false, disablePadding: false, label: 'Статус' },
+            { id: 'resolveDateTime', numeric: false, disablePadding: false, label: 'Дата и время выполнения' },
+        ]
+    };
+
     componentDidMount() {
-        //requestEvents(this.props.dispatch);
+        api.get(REQUEST_EVENTS_URL)
+            .then((data) => {
+                this.props.requestEvents(data);
+            });
     }
 
     render() {
         const { classes, events } = this.props;
-        console.log("events ", events);
+        const tableColumns = this.getTableColumns();
+
         return (
             <Paper className={classes.root}>
                 {events.length != 0 &&
-                    <Grid tableData={events} />
+                    <Grid columns={tableColumns}
+                        data={events}
+                        sortBy='applicant'
+                        order='asc' />
                 }
             </Paper>
         )
     }
 };
 
-const mapStateToProps = (state) => ({
-    events: getEventsState(state)
-});
-
 Events.propTypes = {
-    dispatch: PropTypes.func
+    events: PropTypes.array,
+    requestEvents: PropTypes.func
 }
 
-export default connect(mapStateToProps)(withStyles(eventListStyles)(Events));
+const mapStateToProps = (state) => ({
+    events: state.events.get('events').toJS()
+});
+
+const mapDispatchToProps = {
+    requestEvents
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(eventListStyles)(Events));

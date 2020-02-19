@@ -1,76 +1,76 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withStyles, Table, TablePagination } from '@material-ui/core/';
 import tableStyles from './grid-styles';
 import GridHeader from './GridHeader';
 import GridBody from './GridBody';
 
-const tableColumns = [
-    { id: 'applicant', numeric: false, disablePadding: false, label: 'ФИО подавшего заявку' },
-    { id: 'applyDateTime', numeric: false, disablePadding: false, label: 'Дата и время подачи' },
-    { id: 'descripton', numeric: false, disablePadding: false, label: 'Описание' },
-    { id: 'responsible', numeric: false, disablePadding: false, label: 'Ответственный' },
-    { id: 'eventStatusName', numeric: false, disablePadding: false, label: 'Статус' },
-    { id: 'resolveDateTime', numeric: false, disablePadding: false, label: 'Дата и время выполнения' },
-];
-
 class Grid extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            columns: tableColumns,
-            order: 'asc',
-            orderBy: 'applicant',
-            data: this.props.tableData,
             page: 0,
             rowsPerPage: 10
         };
+
+        this.handleChangePage = this.handleChangePage.bind(this);
+        this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
+        this.onSort = this.onSort.bind(this);
+        this.onRowClick = this.onRowClick.bind(this);
     };
 
-    handleChangePage = (event, page) => {
+    handleChangePage(event, page) {
         this.setState({ page });
     };
 
-    handleChangeRowsPerPage = event => {
+    handleChangeRowsPerPage(event) {
         this.setState({ rowsPerPage: event.target.value });
     };
 
-    handleRequestSort = (event, property) => {
-        const orderBy = property;
-        let order = 'desc';
+    onSort(event) {
+        const columnId = event.target.id;
 
-        if (this.state.orderBy === property && this.state.order === 'desc') {
+        let order = 'desc';
+        if (this.state.sortBy === columnId && this.state.order === 'desc') {
             order = 'asc';
         }
 
-        this.setState({ order, orderBy });
+        this.setState({ order, columnId });
     };
 
-    handleClick = (event, id) => {
-        console.log("handle click");
+    onRowClick(event) {
+        console.log("event", event);
     };
 
     render() {
-        const { classes } = this.props;
-
-        const headerOptions = {
-            onRequestSort: this.handleRequestSort
-        };
-
-        const bodyOptions = {
-            handleClick: this.handleClick
-        };
+        const { classes, columns, data, sortBy, order } = this.props;
+        const { page, rowsPerPage } = this.state;
 
         return (
             <div className={classes.tableWrapper}>
                 <Table className={classes.table} aria-labelledby="tableTitle">
-                    <GridHeader tableState={this.state} options={headerOptions} />
-                    <GridBody tableState={this.state} options={bodyOptions} />
+                    <GridHeader
+                        columns={columns}
+                        sortBy={sortBy}
+                        order={order}
+                        onSort={this.onSort}
+                    />
+                    <GridBody
+                        columns={columns}
+                        data={data}
+                        sortBy={sortBy}
+                        order={order}
+                        page={page}
+                        rowsPerPage={rowsPerPage}
+                        onRowClick={this.onRowClick}
+                    />
                 </Table>
-                {/* <TablePagination
+                <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={tableData.length}
+                    count={data.length}
                     rowsPerPage={this.state.rowsPerPage}
                     page={this.state.page}
                     backIconButtonProps={{
@@ -81,11 +81,18 @@ class Grid extends Component {
                     }}
                     onChangePage={this.handleChangePage}
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                /> */}
+                />
             </div>
 
         )
     }
+}
+
+Grid.propTypes = {
+    columns: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
+    sortBy: PropTypes.string,
+    order: PropTypes.string
 }
 
 export default withStyles(tableStyles)(Grid)

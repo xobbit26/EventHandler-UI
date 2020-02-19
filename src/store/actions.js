@@ -5,4 +5,4 @@ export const OPEN_SIDE_BAR = 'OPEN_SIDE_BAR';
 export const CLOSE_SIDE_BAR = 'CLOSE_SIDE_BAR';
 
 export const CREATE_EVENT = 'CREATE_EVENT';
-export const GET_EVENTS = 'GET_EVENTS';
+export const REQUEST_EVENTS = 'REQUEST_EVENTS';

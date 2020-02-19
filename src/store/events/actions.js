@@ -1,10 +1,8 @@
-import { GET_EVENTS } from './action-types';
-import { GET_EVENTS_URL, get } from '../../../api/api';
+import { REQUEST_EVENTS } from '../actions';
 
-export const getEvents = (params) => {
-    let events = get(GET_EVENTS_URL, params);
+export const requestEvents = (events) => {
     return {
-        type: GET_EVENTS,
+        type: REQUEST_EVENTS,
         payload: events
     }
 };

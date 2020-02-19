@@ -1,7 +1,7 @@
 import { API_URL } from '../config';
 
 export const CREATE_EVENT_URL = `${API_URL}/api/event`;
-export const GET_EVENTS_URL = `${API_URL}/api/event`;
+export const REQUEST_EVENTS_URL = `${API_URL}/api/event`;
 
 
 const headers = {
@@ -10,7 +10,7 @@ const headers = {
 };
 
 
-export const post = (url, data = {}, options = {}) => {
+const post = (url, data = {}, options = {}) => {
 
     const jsonData = JSON.stringify(data);
     options = {
@@ -25,14 +25,19 @@ export const post = (url, data = {}, options = {}) => {
         });
 }
 
-export const get = (url, data = {}, options = {}) => {
+const get = (url, data = {}, options = {}) => {
     options = {
         method: 'GET'
     };
-    
+
     return fetch(url, { ...options, headers })
-        .then(response => console.log(response))
+        .then((response) => response.json())
         .catch((error) => {
             throw error;
         });
+}
+
+export const api = {
+    post,
+    get
 }

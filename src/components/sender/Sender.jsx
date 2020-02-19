@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Input from '../../sharedComponents/input/input.jsx';
 import { Button, withStyles, Grid, List, ListItem } from '@material-ui/core';
 import { sendEvent } from '../../store/sender/actions';
+import { CREATE_EVENT_URL, api } from '../../api/api';
+
 import senderStyles from './sender-style';
 
 class Sender extends Component {
@@ -37,8 +39,11 @@ class Sender extends Component {
     };
 
     onSend() {
-        this.props.sendEvent(this.state);
-        this.clearState();
+        api.post(CREATE_EVENT_URL, this.state)
+            .then(() => {
+                this.props.sendEvent();
+                this.clearState();
+            })
     };
 
     clearState() {
