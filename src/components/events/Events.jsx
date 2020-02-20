@@ -6,6 +6,7 @@ import { requestEvents } from '../../store/events/actions';
 import PropTypes from 'prop-types';
 import Grid from '../../sharedComponents/grid/Grid';
 import { REQUEST_EVENTS_URL, api } from '../../api/api';
+import { gridConstants } from '../../constants/gridConstants';
 
 import eventListStyles from './events-styles';
 
@@ -13,6 +14,8 @@ class Events extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.requestEventsGridData = this.requestEventsGridData.bind(this);
     };
 
     getTableColumns() {
@@ -27,7 +30,14 @@ class Events extends React.Component {
     };
 
     componentDidMount() {
-        api.get(REQUEST_EVENTS_URL)
+        this.requestEventsGridData(0, gridConstants.itemsPerPage);
+    }
+
+    requestEventsGridData(page, itemsPerPage) {
+        const skip = page * itemsPerPage;
+
+        const url = `${REQUEST_EVENTS_URL}?skip=${skip}&take=${itemsPerPage}`;
+        api.get(url)
             .then((data) => {
                 this.props.requestEvents(data);
             });
