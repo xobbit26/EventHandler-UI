@@ -1,7 +1,7 @@
 import { API_URL } from '../config';
 
 export const CREATE_EVENT_URL = `${API_URL}/api/event`;
-export const REQUEST_EVENTS_URL = `${API_URL}/api/event`;
+export const REQUEST_EVENTS_URL = `${API_URL}/api/event/grid-data`;
 
 
 const headers = {

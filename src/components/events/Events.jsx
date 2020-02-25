@@ -15,43 +15,52 @@ class Events extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            grid: {
+                page: 0,
+                rowsPerPage: gridConstants.defaultItemsPerPage
+            }
+        }
+
         this.requestEventsGridData = this.requestEventsGridData.bind(this);
     };
 
-    getTableColumns() {
-        return [
-            { id: 'applicant', numeric: false, label: 'ФИО подавшего заявку' },
-            { id: 'applyDateTime', numeric: false, label: 'Дата и время подачи' },
-            { id: 'descripton', numeric: false, label: 'Описание' },
-            { id: 'responsible', numeric: false, label: 'Ответственный' },
-            { id: 'eventStatusName', numeric: false, label: 'Статус' },
-            { id: 'resolveDateTime', numeric: false, label: 'Дата и время выполнения' },
-        ]
-    };
-
     componentDidMount() {
-        this.requestEventsGridData(0, gridConstants.itemsPerPage);
+        const { page, rowsPerPage } = this.state.grid;
+        this.requestEventsGridData(page, rowsPerPage);
     }
 
     requestEventsGridData(page, itemsPerPage) {
+        const { grid } = this.state;
         const skip = page * itemsPerPage;
-
         const url = `${REQUEST_EVENTS_URL}?skip=${skip}&take=${itemsPerPage}`;
         api.get(url)
             .then((data) => {
                 this.props.requestEvents(data);
+            })
+            .then(() => {
+                if (grid.rowsPerPage !== itemsPerPage || grid.page !== page) {
+                    this.setState({ grid: { rowsPerPage: itemsPerPage, page: page } });
+                }
             });
     }
 
     render() {
-        const { classes, events } = this.props;
-        const tableColumns = this.getTableColumns();
+        const { page, rowsPerPage } = this.state.grid;
+        const { classes, eventsGridData } = this.props;
+        const { isGridEmpty, data, columns, totalItems } = eventsGridData;
 
         return (
             <Paper className={classes.root}>
-                {events.length != 0 &&
-                    <Grid columns={tableColumns}
-                        data={events}
+                {!isGridEmpty &&
+                    <Grid columns={columns}
+                        data={data}
+                        totalItems={totalItems}
+                        onChangePage={this.requestEventsGridData}
+                        onChangeRowsNumber={this.requestEventsGridData}
+                        page={page}
+                        rowsPerPage={rowsPerPage}
+                        withPaging={true}
                         sortBy='applicant'
                         order='asc' />
                 }
@@ -61,12 +70,12 @@ class Events extends React.Component {
 };
 
 Events.propTypes = {
-    events: PropTypes.array,
+    eventsGridData: PropTypes.object,
     requestEvents: PropTypes.func
 }
 
 const mapStateToProps = (state) => ({
-    events: state.events.get('events').toJS()
+    eventsGridData: state.events.get('eventsGridData').toJS()
 });
 
 const mapDispatchToProps = {

@@ -1,40 +1,45 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { TableBody, TableCell, TableRow } from '@material-ui/core/';
 import { stableSort, getSorting } from '../../utils/gridUtils';
 
-class GridBody extends Component {
+class GridBody extends PureComponent {
 
     constructor(props) {
         super(props);
     };
 
     render() {
-        const { data, order, sortBy, rowsPerPage, page, onRowClick } = this.props;
+        const { data, columns, order, sortBy, onRowClick } = this.props;
 
         return (
             <TableBody>
                 {stableSort(data, getSorting(order, sortBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map(n => {
+                    .map(row => {
                         return (
                             <TableRow
                                 hover
                                 onClick={onRowClick}
                                 tabIndex={-1}
-                                key={n.id}
+                                key={row.id}
                             >
-                                <TableCell>{n.applicant}</TableCell>
-                                <TableCell>{n.applyDateTime}</TableCell>
-                                <TableCell>{n.description}</TableCell>
-                                <TableCell>{n.responsible}</TableCell>
-                                <TableCell>{n.eventStatusName}</TableCell>
-                                <TableCell>{n.resolveDateTime}</TableCell>
+                                {columns.map((column) => {
+                                    return <TableCell key={row.id, column.id}>{row[column.id]}</TableCell>
+                                })}
                             </TableRow>
                         );
                     })}
             </TableBody>
         )
     }
+}
+
+GridBody.propTypes = {
+    data: PropTypes.array.isRequired,
+    columns: PropTypes.array.isRequired,
+    sortBy: PropTypes.string,
+    order: PropTypes.string,
+    onRowClick: PropTypes.func
 }
 
 export default GridBody;

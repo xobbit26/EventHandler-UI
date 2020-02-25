@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Table, TablePagination } from '@material-ui/core/';
-import tableStyles from './grid-styles';
 import GridHeader from './GridHeader';
 import GridBody from './GridBody';
+import { withStyles, Table, TablePagination } from '@material-ui/core/';
+import tableStyles from './grid-styles';
 
 class Grid extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            page: 0,
-            rowsPerPage: 10
-        };
 
         this.handleChangePage = this.handleChangePage.bind(this);
         this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
@@ -22,11 +17,11 @@ class Grid extends Component {
     };
 
     handleChangePage(event, page) {
-        this.setState({ page });
+        this.props.onChangePage(page, this.props.rowsPerPage);
     };
 
     handleChangeRowsPerPage(event) {
-        this.setState({ rowsPerPage: event.target.value });
+        this.props.onChangeRowsNumber(this.props.page, event.target.value);
     };
 
     onSort(event) {
@@ -43,8 +38,8 @@ class Grid extends Component {
     };
 
     render() {
-        const { classes, columns, data, sortBy, order } = this.props;
-        const { page, rowsPerPage } = this.state;
+        const { classes, columns, data, totalItems,
+            page, rowsPerPage, sortBy, order, withPaging } = this.props;
 
         return (
             <div className={classes.tableWrapper}>
@@ -60,28 +55,23 @@ class Grid extends Component {
                         data={data}
                         sortBy={sortBy}
                         order={order}
-                        page={page}
-                        rowsPerPage={rowsPerPage}
                         onRowClick={this.onRowClick}
                     />
                 </Table>
-                <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    component="div"
-                    count={data.length}
-                    rowsPerPage={this.state.rowsPerPage}
-                    page={this.state.page}
-                    backIconButtonProps={{
-                        'aria-label': 'Previous Page',
-                    }}
-                    nextIconButtonProps={{
-                        'aria-label': 'Next Page',
-                    }}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                />
+                {withPaging &&
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={totalItems}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        backIconButtonProps={{ 'aria-label': 'Previous Page' }}
+                        nextIconButtonProps={{ 'aria-label': 'Next Page' }}
+                        onChangePage={this.handleChangePage}
+                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                    />
+                }
             </div>
-
         )
     }
 }
@@ -89,8 +79,14 @@ class Grid extends Component {
 Grid.propTypes = {
     columns: PropTypes.array.isRequired,
     data: PropTypes.array.isRequired,
+    totalItems: PropTypes.number.isRequired,
+    onChangePage: PropTypes.func,
+    onChangeRowsNumber: PropTypes.func,
+    page: PropTypes.number,
+    rowsPerPage: PropTypes.number,
     sortBy: PropTypes.string,
-    order: PropTypes.string
+    order: PropTypes.string,
+    withPaging: PropTypes.bool
 }
 
 export default withStyles(tableStyles)(Grid)

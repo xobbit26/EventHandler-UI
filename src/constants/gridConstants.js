@@ -1,5 +1,5 @@
-const itemsPerPage = 10;
+const defaultItemsPerPage = 10;
 
 export const gridConstants = {
-    itemsPerPage
+    defaultItemsPerPage
 };

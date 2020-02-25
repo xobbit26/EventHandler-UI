@@ -1,14 +1,19 @@
-import { fromJS, List } from 'immutable';
+import { fromJS } from 'immutable';
 import { REQUEST_EVENTS } from '../actions';
 
 const initialState = fromJS({
-    events: []
+    eventsGridData: {
+        data: [],
+        columns: [],
+        isGridEmpty: true,
+        totalItems: 0
+    }
 });
 
 const eventsReducer = (state = initialState, action) => {
     switch (action.type) {
         case REQUEST_EVENTS:
-            return state.merge({ events: new List(action.payload) });
+            return state.merge({ eventsGridData: fromJS(action.payload) });
         default:
             return state;
     };
