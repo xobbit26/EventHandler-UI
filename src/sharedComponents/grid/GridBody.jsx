@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { TableBody, TableCell, TableRow } from '@material-ui/core/';
-import { stableSort, getSorting } from '../../utils/gridUtils';
+import { stableSort, getSorting, getCellValue } from '../../utils/gridUtils';
 
 class GridBody extends PureComponent {
 
@@ -24,7 +24,11 @@ class GridBody extends PureComponent {
                                 key={row.id}
                             >
                                 {columns.map((column) => {
-                                    return <TableCell key={row.id, column.id}>{row[column.id]}</TableCell>
+                                    return (
+                                        <TableCell key={row.id, column.id}>
+                                            {getCellValue(row, column)}
+                                        </TableCell>
+                                    )
                                 })}
                             </TableRow>
                         );

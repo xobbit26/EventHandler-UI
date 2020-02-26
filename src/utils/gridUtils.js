@@ -1,3 +1,5 @@
+import { toDateTimeFormat } from './dateTimeUtils';
+
 export const stableSort = (array, cmp) => {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
@@ -10,6 +12,15 @@ export const stableSort = (array, cmp) => {
 
 export const getSorting = (order, sortBy) => {
     return order === 'desc' ? (a, b) => desc(a, b, sortBy) : (a, b) => -desc(a, b, sortBy);
+}
+
+export const getCellValue = (row, column) => {
+    switch (column.columnType) {
+        case 'date_time':
+            return toDateTimeFormat(row[column.id]);
+        default:
+            return row[column.id];
+    }
 }
 
 const desc = (a, b, sortBy) => {
