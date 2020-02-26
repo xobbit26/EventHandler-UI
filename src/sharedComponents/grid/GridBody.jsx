@@ -10,11 +10,11 @@ class GridBody extends PureComponent {
     };
 
     render() {
-        const { data, columns, order, sortBy, onRowClick } = this.props;
+        const { data, columns, order, orderBy, onRowClick } = this.props;
 
         return (
             <TableBody>
-                {stableSort(data, getSorting(order, sortBy))
+                {stableSort(data, getSorting(order, orderBy))
                     .map(row => {
                         return (
                             <TableRow
@@ -41,7 +41,7 @@ class GridBody extends PureComponent {
 GridBody.propTypes = {
     data: PropTypes.array.isRequired,
     columns: PropTypes.array.isRequired,
-    sortBy: PropTypes.string,
+    orderBy: PropTypes.string,
     order: PropTypes.string,
     onRowClick: PropTypes.func
 }

@@ -17,20 +17,20 @@ class Grid extends Component {
     };
 
     handleChangePage(event, page) {
-        this.props.onChangePage(page, this.props.rowsPerPage);
+        const { rowsPerPage, orderBy, order } = this.props;
+        this.props.onChangePage(page, rowsPerPage, orderBy, order);
     };
 
     handleChangeRowsPerPage(event) {
-        this.props.onChangeRowsNumber(this.props.page, event.target.value);
+        const { page, orderBy, order } = this.props;
+        this.props.onChangeRowsNumber(page, event.target.value, orderBy, order);
     };
 
-    onSort(event) {
-        const columnId = event.target.id;
+    onSort(sortKey) {
+        const { page, rowsPerPage, orderBy, order } = this.props;
+        const newOrder = orderBy === sortKey && order === 'desc' ? 'asc' : 'desc';
 
-        const order = this.state.sortBy === columnId && this.state.order === 'desc'
-            ? 'asc' : 'desc';
-
-        this.setState({ order, columnId });
+        this.props.onSort(page, rowsPerPage, sortKey, newOrder);
     };
 
     onRowClick(event) {
@@ -39,21 +39,21 @@ class Grid extends Component {
 
     render() {
         const { classes, columns, data, totalItems,
-            page, rowsPerPage, sortBy, order, withPaging } = this.props;
+            page, rowsPerPage, orderBy, order, withPaging } = this.props;
 
         return (
             <div className={classes.tableWrapper}>
                 <Table className={classes.table} aria-labelledby="tableTitle">
                     <GridHeader
                         columns={columns}
-                        sortBy={sortBy}
+                        orderBy={orderBy}
                         order={order}
                         onSort={this.onSort}
                     />
                     <GridBody
                         columns={columns}
                         data={data}
-                        sortBy={sortBy}
+                        orderBy={orderBy}
                         order={order}
                         onRowClick={this.onRowClick}
                     />
@@ -82,9 +82,10 @@ Grid.propTypes = {
     totalItems: PropTypes.number.isRequired,
     onChangePage: PropTypes.func,
     onChangeRowsNumber: PropTypes.func,
+    onSort: PropTypes.func,
     page: PropTypes.number,
     rowsPerPage: PropTypes.number,
-    sortBy: PropTypes.string,
+    orderBy: PropTypes.string,
     order: PropTypes.string,
     withPaging: PropTypes.bool
 }

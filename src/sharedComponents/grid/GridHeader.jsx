@@ -23,7 +23,7 @@ class GridHeader extends Component {
                     {columns.map(column => (
                         <TableCell
                             key={column.id}
-                            sortDirection={orderBy === column.id ? order : false}
+                            sortDirection={orderBy === column.sortKey ? order : false}
                         >
                             <Tooltip
                                 title="Sort"
@@ -31,10 +31,10 @@ class GridHeader extends Component {
                                 enterDelay={200}
                             >
                                 <TableSortLabel
-                                    id={column.id}
-                                    active={orderBy === column.id}
+                                    id={column.sortKey}
+                                    active={orderBy === column.sortKey}
                                     direction={order}
-                                    onClick={onSort}
+                                    onClick={() => onSort(column.sortKey)}
                                 >
                                     {column.label}
                                 </TableSortLabel>

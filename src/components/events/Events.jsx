@@ -18,7 +18,9 @@ class Events extends React.Component {
         this.state = {
             grid: {
                 page: 0,
-                rowsPerPage: gridConstants.defaultItemsPerPage
+                rowsPerPage: gridConstants.defaultItemsPerPage,
+                orderBy: 'applyDateTime',
+                order: 'asc'
             }
         }
 
@@ -26,27 +28,33 @@ class Events extends React.Component {
     };
 
     componentDidMount() {
-        const { page, rowsPerPage } = this.state.grid;
-        this.requestEventsGridData(page, rowsPerPage);
+        const { page, rowsPerPage, orderBy, order } = this.state.grid;
+        this.requestEventsGridData(page, rowsPerPage, orderBy, order);
     }
 
-    requestEventsGridData(page, itemsPerPage) {
-        const { grid } = this.state;
+    requestEventsGridData(page, itemsPerPage, orderBy, order) {
+
         const skip = page * itemsPerPage;
-        const url = `${REQUEST_EVENTS_URL}?skip=${skip}&take=${itemsPerPage}`;
+        const url = `${REQUEST_EVENTS_URL}?skip=${skip}&take=${itemsPerPage}&orderBy=${orderBy}&direction=${order}`;
+
         api.get(url)
             .then((data) => {
                 this.props.requestEvents(data);
             })
             .then(() => {
-                if (grid.rowsPerPage !== itemsPerPage || grid.page !== page) {
-                    this.setState({ grid: { rowsPerPage: itemsPerPage, page: page } });
-                }
+                this.setState({
+                    grid: {
+                        rowsPerPage: itemsPerPage,
+                        page: page,
+                        orderBy: orderBy,
+                        order: order
+                    }
+                });
             });
     }
 
     render() {
-        const { page, rowsPerPage } = this.state.grid;
+        const { page, rowsPerPage, orderBy, order } = this.state.grid;
         const { classes, eventsGridData } = this.props;
         const { isGridEmpty, data, columns, totalItems } = eventsGridData;
 
@@ -58,11 +66,12 @@ class Events extends React.Component {
                         totalItems={totalItems}
                         onChangePage={this.requestEventsGridData}
                         onChangeRowsNumber={this.requestEventsGridData}
+                        onSort={this.requestEventsGridData}
                         page={page}
                         rowsPerPage={rowsPerPage}
                         withPaging={true}
-                        sortBy='applicant'
-                        order='asc' />
+                        orderBy={orderBy}
+                        order={order} />
                 }
             </Paper>
         )
