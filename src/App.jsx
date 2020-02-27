@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Layout from './components/layout/Layout';
+import { api, REQUEST_TRANSLATIONS_URL } from './api/api';
 import {
     checkIsBackendAvailable,
-    checkIsUserAuthenticated
+    checkIsUserAuthenticated,
+    requestTranslations
 } from './store/app/actions';
 
 class App extends Component {
@@ -13,12 +15,19 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.props.checkIsBackendAvailable();
-        this.props.checkIsUserAuthenticated();
+        let translationsUrl = `${REQUEST_TRANSLATIONS_URL}?locale=EN`;
+        api.get(translationsUrl)
+            .then((data) => {
+                this.props.requestTranslations(data);
+            }).then(() => {
+                this.props.checkIsBackendAvailable();
+                this.props.checkIsUserAuthenticated();
+            });
     }
 
     render() {
         const { isBackendAvailable } = this.props;
+
         //TODO: add loader while server request
         return (
             <div>
@@ -35,8 +44,6 @@ class App extends Component {
 
 App.propTypes = {
     isBackendAvailable: PropTypes.bool,
-    checkIsBackendAvailable: PropTypes.func,
-    checkIsUserAuthenticated: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
@@ -47,7 +54,8 @@ const mapStateToProps = (state) => {
 
 const matchDispatchToProps = {
     checkIsBackendAvailable,
-    checkIsUserAuthenticated
+    checkIsUserAuthenticated,
+    requestTranslations
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(App);
