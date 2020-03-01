@@ -5,6 +5,8 @@ import Input from '../../sharedComponents/input/input.jsx';
 import { Button, withStyles, Grid, List, ListItem } from '@material-ui/core';
 import { sendEvent } from '../../store/sender/actions';
 import { CREATE_EVENT_URL, api } from '../../api/api';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import senderStyles from './sender-style';
 
@@ -26,10 +28,11 @@ class Sender extends Component {
     };
 
     getInputParams() {
+        const { t } = this.props;
         return [
-            { id: 'applicant', label: 'ФИО отправителя', multiline: false },
-            { id: 'applicantDepartment', label: 'Отдел', multiline: false },
-            { id: 'description', label: 'Описание', multiline: true, rows: 10 }
+            { id: 'applicant', label: t('CreateEvent_FullName_Label'), multiline: false },
+            { id: 'applicantDepartment', label: t('CreateEvent_Department_Label'), multiline: false },
+            { id: 'description', label: t('CreateEvent_Description_Label'), multiline: true, rows: 10 }
         ]
     }
 
@@ -94,4 +97,8 @@ const matchDispatchToProps = {
     sendEvent
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(withStyles(senderStyles)(Sender));
+export default compose(
+    withTranslation(),
+    connect(mapStateToProps, matchDispatchToProps),
+    withStyles(senderStyles)
+) (Sender);

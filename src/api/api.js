@@ -1,4 +1,4 @@
-import { API_URL } from '../config';
+import { API_URL } from '../configuration/config';
 
 export const REQUEST_TRANSLATIONS_URL = `${API_URL}/api/resource`;
 export const CREATE_EVENT_URL = `${API_URL}/api/event`;

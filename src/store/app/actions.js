@@ -1,7 +1,6 @@
 import {
     CHECK_IS_BACKEND_AVAILABLE,
-    CHECK_IS_USER_AUTHENTICATED,
-    REQUEST_TRANSLATIONS
+    CHECK_IS_USER_AUTHENTICATED
 } from '../actions';
 
 export const checkIsBackendAvailable = () => {
@@ -27,12 +26,5 @@ export const checkIsUserAuthenticated = () => {
     return {
         type: CHECK_IS_USER_AUTHENTICATED,
         payload: true
-    }
-}
-
-export const requestTranslations = (translations) => {
-    return {
-        type: REQUEST_TRANSLATIONS,
-        payload: translations
     }
 }

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Layout from './components/layout/Layout';
-import { api, REQUEST_TRANSLATIONS_URL } from './api/api';
+import { api } from './api/api';
 import {
     checkIsBackendAvailable,
-    checkIsUserAuthenticated,
-    requestTranslations
+    checkIsUserAuthenticated
 } from './store/app/actions';
+
 
 class App extends Component {
     constructor(props) {
@@ -15,14 +15,8 @@ class App extends Component {
     }
 
     componentDidMount() {
-        let translationsUrl = `${REQUEST_TRANSLATIONS_URL}?locale=EN`;
-        api.get(translationsUrl)
-            .then((data) => {
-                this.props.requestTranslations(data);
-            }).then(() => {
-                this.props.checkIsBackendAvailable();
-                this.props.checkIsUserAuthenticated();
-            });
+        this.props.checkIsBackendAvailable();
+        this.props.checkIsUserAuthenticated();
     }
 
     render() {
@@ -54,8 +48,7 @@ const mapStateToProps = (state) => {
 
 const matchDispatchToProps = {
     checkIsBackendAvailable,
-    checkIsUserAuthenticated,
-    requestTranslations
+    checkIsUserAuthenticated
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(App);

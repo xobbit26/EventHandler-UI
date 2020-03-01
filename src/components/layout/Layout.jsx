@@ -34,7 +34,6 @@ class Layout extends Component {
                 >
                     <div className={classes.drawerHeader} />
                     <Switch>
-                        
                         <Route exact path="/" component={Events} />
                         <Route path="/login" component={Login} />
                         {isUserAuthenticated &&
