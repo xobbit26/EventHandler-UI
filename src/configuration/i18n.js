@@ -26,12 +26,12 @@ i18n.use(initReactI18next)
         }
     });
 
-// i18n.on('languageChanged', function (lng) {
-//     // E.g. set the moment locale with the current language
-//     moment.locale(lng);
+i18n.on('languageChanged', function (lng) {
+    // E.g. set the moment locale with the current language
+    moment.locale(lng);
 
-//     // then re-render your app
-//     //app.render();
-// });
+    // then re-render your app
+    //app.render();
+});
 
 export default i18n;
