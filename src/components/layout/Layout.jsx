@@ -12,7 +12,7 @@ import Events from '../events/Events';
 import NotFound_404 from '../404NotFound/404notFound';
 
 import { withStyles } from '@material-ui/core/';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import layoutStyles from './layout-styles';
 
 class Layout extends Component {
@@ -26,9 +26,9 @@ class Layout extends Component {
         return (
             <div className={classes.root}>
                 <AppMenu />
-
+                
                 <main
-                    className={classNames(classes.content, {
+                    className={clsx(classes.content, {
                         [classes.contentShift]: isOpenSideBar,
                     })}
                 >

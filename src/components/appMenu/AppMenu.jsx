@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core/';
 import { Menu as MenuIcon } from '@material-ui/icons/';
 
-import classNames from 'classnames';
+import clsx from 'clsx';
 import appMenuStyles from './app-menu-styles';
 
 class AppMenu extends Component {
@@ -24,8 +24,8 @@ class AppMenu extends Component {
         return (
             <React.Fragment>
                 <CssBaseline />
-                
-                <AppBar position="fixed" className={classNames(classes.appBar, { [classes.appBarShift]: isOpenSideBar, })}>
+
+                <AppBar position="fixed" className={clsx(classes.appBar, { [classes.appBarShift]: isOpenSideBar, })}>
                     <Toolbar disableGutters={!isOpenSideBar}>
 
                         {isUserAuthenticated &&
@@ -33,7 +33,7 @@ class AppMenu extends Component {
                                 color="inherit"
                                 aria-label="Open drawer"
                                 onClick={openSideBar}
-                                className={classNames(classes.menuButton, isOpenSideBar && classes.hide)}
+                                className={clsx(classes.menuButton, isOpenSideBar && classes.hide)}
                             >
                                 <MenuIcon />
                             </IconButton>
