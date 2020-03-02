@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
+
 import Layout from './components/layout/Layout';
 import { api } from './api/api';
 import {
@@ -8,46 +9,32 @@ import {
     checkIsUserAuthenticated
 } from './store/app/actions';
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-    }
+function App () {
+    const dispatch = useDispatch();
 
-    componentDidMount() {
-        this.props.checkIsBackendAvailable();
-        this.props.checkIsUserAuthenticated();
-    }
+    useEffect(() => {
+        dispatch(checkIsBackendAvailable());
+        dispatch(checkIsUserAuthenticated());
+    }, []);
 
-    render() {
-        const { isBackendAvailable } = this.props;
+    const { isBackendAvailable } = useSelector(state => ({
+        isBackendAvailable: state.app.get('isBackendAvailable'),
+    }));
 
-        //TODO: add loader while server request
-        return (
-            <div>
-                {isBackendAvailable ?
-                    <React.Fragment>
-                        <Layout />
-                    </React.Fragment>
-                    : <div>Backend is not available</div>
-                }
-            </div>
-        );
-    }
+    return (
+        <div>
+            {isBackendAvailable ?
+                <React.Fragment>
+                    <Layout />
+                </React.Fragment>
+                : <div>Backend is not available</div>
+            }
+        </div>
+    );
 }
 
 App.propTypes = {
     isBackendAvailable: PropTypes.bool,
 }
 
-const mapStateToProps = (state) => {
-    return {
-        isBackendAvailable: state.app.get('isBackendAvailable')
-    }
-}
-
-const matchDispatchToProps = {
-    checkIsBackendAvailable,
-    checkIsUserAuthenticated
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(App);
+export default App;
