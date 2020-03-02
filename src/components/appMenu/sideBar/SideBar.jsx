@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { withTranslation } from 'react-i18next';
 
 import {
     withStyles, IconButton, Drawer, Divider,
@@ -22,15 +24,18 @@ import sideBarStyles from './side-bar-styles';
 class SideBar extends Component {
     constructor(props) {
         super(props);
+
+        this.getMenuListItemsParams = this.getMenuListItemsParams.bind(this);
     }
 
     getMenuListItemsParams() {
+        const { t } = this.props;
         return [
-            { key: 'sender', name: 'Создать заявку', url: '/sender', icon: <AddIcon /> },
-            { key: 'events', name: 'Список заявок', url: '/events', icon: <ViewListIcon /> },
-            { key: 'reports', name: 'Отчеты', url: '/reports', icon: <AssessmentIcon /> },
-            { key: 'administration', name: 'Админка', url: '/administration', icon: <AccountCircleIcon /> },
-            { key: 'settings', name: 'Настройки', url: '/settings', icon: <SettingIcon /> }
+            { key: 'sender', name: t('AppBar_Create_Event_Label'), url: '/sender', icon: <AddIcon /> },
+            { key: 'events', name: t('AppBar_Event_List_Label'), url: '/events', icon: <ViewListIcon /> },
+            { key: 'reports', name: t('AppBar_Reports_Label'), url: '/reports', icon: <AssessmentIcon /> },
+            { key: 'administration', name: t('AppBar_Reports_Administration'), url: '/administration', icon: <AccountCircleIcon /> },
+            { key: 'settings', name: t('AppBar_Reports_Settings'), url: '/settings', icon: <SettingIcon /> }
         ];
     }
 
@@ -74,8 +79,12 @@ class SideBar extends Component {
 }
 
 SideBar.propTypes = {
+    t: PropTypes.func,
     isOpenSideBar: PropTypes.bool,
     closeSideBar: PropTypes.func
 }
 
-export default withStyles(sideBarStyles, { withTheme: true })(SideBar);
+export default compose(
+    withTranslation(),
+    withStyles(sideBarStyles, { withTheme: true })
+)(SideBar);

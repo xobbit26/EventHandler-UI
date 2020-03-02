@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
+
 import Input from '../../sharedComponents/input/input.jsx';
 import { Button, withStyles, Grid, List, ListItem } from '@material-ui/core';
 import { sendEvent } from '../../store/sender/actions';
 import { CREATE_EVENT_URL, api } from '../../api/api';
-import { compose } from 'redux';
-import { withTranslation } from 'react-i18next';
 
 import senderStyles from './sender-style';
 
@@ -58,7 +59,7 @@ class Sender extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { t, classes } = this.props;
         return (
             <Grid container justify="center">
                 <List className={classes.list}>
@@ -77,7 +78,7 @@ class Sender extends Component {
                         <Button variant="contained"
                             color="secondary"
                             onClick={this.onSend}>
-                            Отправить
+                            {t('CreateEvent_Submit_Button_Label')}
                         </Button>
                     </ListItem>
                 </List>
@@ -87,6 +88,7 @@ class Sender extends Component {
 };
 
 Sender.propTypes = {
+    t: PropTypes.func,
     dispatch: PropTypes.func
 };
 
@@ -101,4 +103,4 @@ export default compose(
     withTranslation(),
     connect(mapStateToProps, matchDispatchToProps),
     withStyles(senderStyles)
-) (Sender);
+)(Sender);

@@ -1,13 +1,16 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { requestEvents } from '../../store/events/actions';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import Grid from '../../sharedComponents/grid/Grid';
+import i18next from 'i18next';
+
+import { requestEvents } from '../../store/events/actions';
 import { REQUEST_EVENTS_URL, api } from '../../api/api';
 import { gridConstants } from '../../constants/gridConstants';
+import Grid from '../../sharedComponents/grid/Grid';
 
+import { withStyles } from '@material-ui/core/styles';
 import eventListStyles from './events-styles';
 
 class Events extends React.Component {
@@ -34,8 +37,12 @@ class Events extends React.Component {
 
     requestEventsGridData(page, itemsPerPage, orderBy, order) {
 
+        //TODO: After creating loader it needt to get language parameter from i18next api
+        console.log("i18next.language", i18next.language);
+        const language = 'en';
+
         const skip = page * itemsPerPage;
-        const url = `${REQUEST_EVENTS_URL}?skip=${skip}&take=${itemsPerPage}&orderBy=${orderBy}&direction=${order}`;
+        const url = `${REQUEST_EVENTS_URL}/${language}?skip=${skip}&take=${itemsPerPage}&orderBy=${orderBy}&direction=${order}`;
 
         api.get(url)
             .then((data) => {
@@ -91,4 +98,7 @@ const mapDispatchToProps = {
     requestEvents
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(eventListStyles)(Events));
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withStyles(eventListStyles)
+)(Events);
