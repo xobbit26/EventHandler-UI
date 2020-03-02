@@ -1,4 +1,6 @@
-const layoutStyles = theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+const layoutStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexGrow: 1,
@@ -29,6 +31,6 @@ const layoutStyles = theme => ({
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
     },
-})
+}));
 
 export default layoutStyles;
