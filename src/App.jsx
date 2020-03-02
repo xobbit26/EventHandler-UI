@@ -17,9 +17,7 @@ function App() {
         dispatch(checkIsUserAuthenticated());
     }, []);
 
-    const { isBackendAvailable } = useSelector(state => ({
-        isBackendAvailable: state.app.get('isBackendAvailable'),
-    }));
+    const isBackendAvailable = useSelector(state => state.app.get('isBackendAvailable'));
 
     return (
         <div>

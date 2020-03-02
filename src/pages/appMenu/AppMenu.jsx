@@ -21,14 +21,21 @@ function AppMenu() {
     const dispatch = useDispatch();
 
     const { isUserAuthenticated, isOpenSideBar } = useSelector(state => ({
-        isUserAuthenticated: state.app.get('isUserAuthentificated'),
+        isUserAuthenticated: state.app.get('isUserAuthenticated'),
         isOpenSideBar: state.appMenu.get('isOpenSideBar'),
     }));
+
+    function onOpenSideBar() {
+        dispatch(openSideBar());
+    }
+
+    function onCloseSideBar() {
+        dispatch(closeSideBar());
+    }
 
     return (
         <React.Fragment>
             <CssBaseline />
-
             <AppBar position="fixed" className={clsx(classes.appBar, { [classes.appBarShift]: isOpenSideBar, })}>
                 <Toolbar disableGutters={!isOpenSideBar}>
 
@@ -36,7 +43,7 @@ function AppMenu() {
                         <IconButton
                             color="inherit"
                             aria-label="Open drawer"
-                            onClick={() => dispatch(openSideBar)}
+                            onClick={onOpenSideBar}
                             className={clsx(classes.menuButton, isOpenSideBar && classes.hide)}
                         >
                             <MenuIcon />
@@ -48,7 +55,7 @@ function AppMenu() {
             </AppBar>
 
             <SideBar isOpenSideBar={isOpenSideBar}
-                closeSideBar={() => dispatch(closeSideBar)} />
+                closeSideBar={onCloseSideBar} />
 
         </React.Fragment>
     )

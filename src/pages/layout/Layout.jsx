@@ -17,12 +17,12 @@ import layoutStyles from './layout-styles';
 
 function Layout() {
 
+    const classes = layoutStyles();
     const { isUserAuthenticated, isOpenSideBar } = useSelector(state => ({
-        isUserAuthenticated: state.app.get('isUserAuthentificated'),
+        isUserAuthenticated: state.app.get('isUserAuthenticated'),
         isOpenSideBar: state.appMenu.get('isOpenSideBar'),
     }));
 
-    const classes = layoutStyles();
     return (
         <div className={classes.root}>
             <AppMenu />
