@@ -1,11 +1,13 @@
-const appMenuStyles = theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+const appMenuStyles = makeStyles(theme => ({
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
     },
-    
+
     appBarShift: {
         width: `calc(100% - ${theme.drawerWidth}px)`,
         marginLeft: theme.drawerWidth,
@@ -33,6 +35,6 @@ const appMenuStyles = theme => ({
     loginButton: {
         marginRight: 20
     },
-});
+}));
 
 export default appMenuStyles;
