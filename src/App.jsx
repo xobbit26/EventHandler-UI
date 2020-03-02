@@ -8,7 +8,6 @@ import {
     checkIsUserAuthenticated
 } from './store/app/actions';
 
-
 class App extends Component {
     constructor(props) {
         super(props);
