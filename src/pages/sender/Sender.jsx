@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 
-import Input from '../../sharedComponents/input/input.jsx';
+import Input from '../../components/input/input.jsx';
 import { Button, withStyles, Grid, List, ListItem } from '@material-ui/core';
 import { sendEvent } from '../../store/sender/actions';
 import { CREATE_EVENT_URL, api } from '../../api/api';

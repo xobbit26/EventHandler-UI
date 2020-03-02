@@ -8,7 +8,7 @@ import i18next from 'i18next';
 import { requestEvents } from '../../store/events/actions';
 import { REQUEST_EVENTS_URL, api } from '../../api/api';
 import { gridConstants } from '../../constants/gridConstants';
-import Grid from '../../sharedComponents/grid/Grid';
+import Grid from '../../components/grid/Grid';
 
 import { withStyles } from '@material-ui/core/styles';
 import eventListStyles from './events-styles';

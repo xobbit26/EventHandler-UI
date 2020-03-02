@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 
-import Layout from './components/layout/Layout';
+import Layout from './pages/layout/Layout';
 import { api } from './api/api';
 import {
     checkIsBackendAvailable,
     checkIsUserAuthenticated
 } from './store/app/actions';
 
-function App () {
+function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
