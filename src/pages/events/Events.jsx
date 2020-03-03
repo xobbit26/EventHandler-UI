@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import i18next from 'i18next';
 
 import { requestEvents } from '../../store/events/actions';
-import { REQUEST_EVENTS_URL, api } from '../../api/api';
+import { getEventsGridData } from '../../api/events.api';
 import { gridConstants } from '../../constants/gridConstants';
 import Grid from '../../components/grid/Grid';
 
@@ -29,15 +28,7 @@ function Events() {
     }, []);
 
     function requestEventsGridData(page, rowsPerPage, orderBy, order) {
-
-        //TODO: After creating loader it needt to get language parameter from i18next api
-        console.log("i18next.language", i18next.language);
-        const language = 'en';
-
-        const skip = page * rowsPerPage;
-        const url = `${REQUEST_EVENTS_URL}/${language}?skip=${skip}&take=${rowsPerPage}&orderBy=${orderBy}&direction=${order}`;
-
-        api.get(url)
+        getEventsGridData(page, rowsPerPage, orderBy, order)
             .then((data) => { dispatch(requestEvents(data)); })
             .then(() => { setGridOptions({ rowsPerPage, page, orderBy, order }); });
     };

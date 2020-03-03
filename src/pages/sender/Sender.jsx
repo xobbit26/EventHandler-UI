@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 import Input from '../../components/input/input.jsx';
 import { Button, Grid, List, ListItem } from '@material-ui/core';
 import { sendEvent } from '../../store/sender/actions';
-import { CREATE_EVENT_URL, api } from '../../api/api';
+import { postEvent } from '../../api/sender.api';
 
 import useSenderStyle from './sender-style';
 
@@ -30,11 +30,11 @@ function Sender() {
     };
 
     function onSend() {
-        api.post(CREATE_EVENT_URL, inputs)
+        postEvent(inputs)
             .then(() => {
                 dispatch(sendEvent());
                 clearState();
-            })
+            });
     };
 
     function clearState() {
@@ -67,7 +67,7 @@ function Sender() {
     );
 };
 
-Sender.propTypes={
+Sender.propTypes = {
     dispatch: PropTypes.func,
     t: PropTypes.func,
     classes: PropTypes.object
