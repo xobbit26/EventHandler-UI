@@ -17,8 +17,8 @@ i18n.use(initReactI18next)
         fallbackLng: false,
 
         react: {
-            //wait: true
-            useSuspense: false
+            wait: true,
+            useSuspense: true
         },
 
         backend: {

@@ -42,7 +42,7 @@ function Layout() {
                     <Route path="*" component={NotFound_404} />
                 </Switch>
             </main>
-        </div >
+        </div>
     );
 }
 
