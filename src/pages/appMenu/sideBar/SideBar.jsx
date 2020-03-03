@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { withTranslation } from 'react-i18next';
 
 import {
-    withStyles, IconButton, Drawer, Divider,
+    IconButton, Drawer, Divider,
     List, ListItem, ListItemIcon, ListItemText,
 } from '@material-ui/core/';
 
@@ -19,17 +19,16 @@ import {
     Add as AddIcon
 } from '@material-ui/icons/';
 
-import sideBarStyles from './side-bar-styles';
+import { useTheme } from '@material-ui/core/styles';
+import useSideBarStyles from './side-bar-styles';
 
-class SideBar extends Component {
-    constructor(props) {
-        super(props);
+function SideBar({ closeSideBar }) {
+    const isOpenSideBar = useSelector(state => state.appMenu.get('isOpenSideBar'));
+    const { t } = useTranslation();
+    const classes = useSideBarStyles();
+    const theme = useTheme();
 
-        this.getMenuListItemsParams = this.getMenuListItemsParams.bind(this);
-    }
-
-    getMenuListItemsParams() {
-        const { t } = this.props;
+    function getMenuListItemsParams() {
         return [
             { key: 'sender', name: t('AppBar_Create_Event_Label'), url: '/sender', icon: <AddIcon /> },
             { key: 'events', name: t('AppBar_Event_List_Label'), url: '/events', icon: <ViewListIcon /> },
@@ -37,54 +36,48 @@ class SideBar extends Component {
             { key: 'administration', name: t('AppBar_Reports_Administration'), url: '/administration', icon: <AccountCircleIcon /> },
             { key: 'settings', name: t('AppBar_Reports_Settings'), url: '/settings', icon: <SettingIcon /> }
         ];
-    }
+    };
 
-    getMenuListItems() {
-        const menuElementList = this.getMenuListItemsParams().map((item) => {
+    function getMenuListItems() {
+        return getMenuListItemsParams().map((item) => {
             return (
                 <ListItem button key={item.key} component={Link} to={item.url}>
                     <ListItemIcon>{item.icon}</ListItemIcon>
                     <ListItemText primary={item.name} />
                 </ListItem>
             );
-        })
-        return menuElementList;
+        });
     };
 
-    render() {
-        const { classes, theme, isOpenSideBar, closeSideBar } = this.props;
-
-        return (
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={isOpenSideBar}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={closeSideBar}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    {this.getMenuListItems()}
-                </List>
-            </Drawer>
-        );
-    }
-}
+    return (
+        <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={isOpenSideBar}
+            classes={{
+                paper: classes.drawerPaper,
+            }}
+        >
+            <div className={classes.drawerHeader}>
+                <IconButton onClick={closeSideBar}>
+                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                </IconButton>
+            </div>
+            <Divider />
+            <List>
+                {getMenuListItems()}
+            </List>
+        </Drawer>
+    );
+};
 
 SideBar.propTypes = {
-    t: PropTypes.func,
     isOpenSideBar: PropTypes.bool,
-    closeSideBar: PropTypes.func
-}
+    closeSideBar: PropTypes.func,
+    t: PropTypes.func,
+    classes: PropTypes.object,
+    theme: PropTypes.object
+};
 
-export default compose(
-    withTranslation(),
-    withStyles(sideBarStyles, { withTheme: true })
-)(SideBar);
+export default SideBar;

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const senderStyle = makeStyles(theme => ({
+const useSenderStyle = makeStyles(theme => ({
     list: {
         width: '100%',
         height: '100%',
@@ -16,4 +16,4 @@ const senderStyle = makeStyles(theme => ({
     },
 }));
 
-export default senderStyle;
+export default useSenderStyle;

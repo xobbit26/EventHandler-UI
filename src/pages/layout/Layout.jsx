@@ -13,11 +13,11 @@ import Events from '../events/Events';
 import NotFound_404 from '../404NotFound/404notFound';
 
 import clsx from 'clsx';
-import layoutStyles from './layout-styles';
+import useLayoutStyles from './layout-styles';
 
 function Layout() {
 
-    const classes = layoutStyles();
+    const classes = useLayoutStyles();
     const { isUserAuthenticated, isOpenSideBar } = useSelector(state => ({
         isUserAuthenticated: state.app.get('isUserAuthenticated'),
         isOpenSideBar: state.appMenu.get('isOpenSideBar'),
@@ -48,7 +48,8 @@ function Layout() {
 
 Layout.propTypes = {
     isUserAuthenticated: PropTypes.bool,
-    isOpenSideBar: PropTypes.bool
+    isOpenSideBar: PropTypes.bool,
+    classes: PropTypes.object
 };
 
 export default Layout;

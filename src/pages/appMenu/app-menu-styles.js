@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const appMenuStyles = makeStyles(theme => ({
+const useAppMenuStyles = makeStyles(theme => ({
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
@@ -37,4 +37,4 @@ const appMenuStyles = makeStyles(theme => ({
     },
 }));
 
-export default appMenuStyles;
+export default useAppMenuStyles;

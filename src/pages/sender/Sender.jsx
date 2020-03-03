@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useTranslation } from 'react-i18next';
+import { PropTypes } from 'prop-types';
 
 import Input from '../../components/input/input.jsx';
 import { Button, Grid, List, ListItem } from '@material-ui/core';
 import { sendEvent } from '../../store/sender/actions';
 import { CREATE_EVENT_URL, api } from '../../api/api';
 
-import senderStyles from './sender-style';
+import useSenderStyle from './sender-style';
 
 function Sender() {
     const [inputs, setInputs] = useState({ applicant: '', applicantDepartment: '', description: '' });
     const dispatch = useDispatch();
     const { t } = useTranslation();
-    const classes = senderStyles();
+    const classes = useSenderStyle();
 
     function getInputParams() {
         return [
@@ -21,7 +22,7 @@ function Sender() {
             { id: 'applicantDepartment', label: t('CreateEvent_Department_Label'), multiline: false },
             { id: 'description', label: t('CreateEvent_Description_Label'), multiline: true, rows: 10 }
         ]
-    }
+    };
 
     function handleChange(event) {
         const { id, value } = event.target;
@@ -38,7 +39,7 @@ function Sender() {
 
     function clearState() {
         setInputs({ applicant: '', applicantDepartment: '', description: '' });
-    }
+    };
 
     return (
         <Grid container justify="center">
@@ -63,7 +64,13 @@ function Sender() {
                 </ListItem>
             </List>
         </Grid>
-    )
+    );
+};
+
+Sender.propTypes={
+    dispatch: PropTypes.func,
+    t: PropTypes.func,
+    classes: PropTypes.object
 }
 
 export default Sender;

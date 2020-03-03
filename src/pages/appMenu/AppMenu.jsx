@@ -13,11 +13,11 @@ import {
 } from '@material-ui/core/';
 
 import clsx from 'clsx';
-import appMenuStyles from './app-menu-styles';
+import useAppMenuStyles from './app-menu-styles';
 
 function AppMenu() {
     const { t } = useTranslation();
-    const classes = appMenuStyles();
+    const classes = useAppMenuStyles();
     const dispatch = useDispatch();
 
     const { isUserAuthenticated, isOpenSideBar } = useSelector(state => ({
@@ -27,11 +27,11 @@ function AppMenu() {
 
     function onOpenSideBar() {
         dispatch(openSideBar());
-    }
+    };
 
     function onCloseSideBar() {
         dispatch(closeSideBar());
-    }
+    };
 
     return (
         <React.Fragment>
@@ -54,19 +54,20 @@ function AppMenu() {
                 </Toolbar>
             </AppBar>
 
-            <SideBar isOpenSideBar={isOpenSideBar}
-                closeSideBar={onCloseSideBar} />
+            <SideBar closeSideBar={onCloseSideBar} />
 
         </React.Fragment>
-    )
-}
+    );
+};
 
 AppMenu.propTypes = {
     t: PropTypes.func,
+    classes: PropTypes.object,
+    dispatch: PropTypes.func,
     isUserAuthenticated: PropTypes.bool,
     isOpenSideBar: PropTypes.bool,
     openSideBar: PropTypes.func,
     closeSideBar: PropTypes.func
-}
+};
 
 export default AppMenu;

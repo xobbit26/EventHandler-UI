@@ -1,4 +1,6 @@
-const sideBarStyles = theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+const useSideBarStyles = makeStyles(theme => ({
 
     drawer: {
         width: theme.drawerWidth,
@@ -8,7 +10,7 @@ const sideBarStyles = theme => ({
     drawerPaper: {
         width: theme.drawerWidth,
     },
-    
+
     drawerHeader: {
         display: 'flex',
         alignItems: 'center',
@@ -16,6 +18,6 @@ const sideBarStyles = theme => ({
         ...theme.mixins.toolbar,
         justifyContent: 'flex-end',
     },
-});
+}));
 
-export default sideBarStyles;
+export default useSideBarStyles;

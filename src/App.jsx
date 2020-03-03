@@ -17,7 +17,7 @@ function App() {
         dispatch(checkIsUserAuthenticated());
     }, []);
 
-    const isBackendAvailable = useSelector(state => state.app.get('isBackendAvailable'));
+    const isBackendAvailable = useSelector(state => state.app.get('isBackendAvailable'), []);
 
     return (
         <div>
@@ -33,6 +33,7 @@ function App() {
 
 App.propTypes = {
     isBackendAvailable: PropTypes.bool,
+    dispatch: PropTypes.func
 }
 
 export default App;
