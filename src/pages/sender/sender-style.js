@@ -11,8 +11,16 @@ const useSenderStyle = makeStyles(theme => ({
         marginTop: theme.spacing(),
         boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2)'
     },
+
     inline: {
         display: 'inline',
+    },
+
+    success: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
     },
 }));
 

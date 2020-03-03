@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import { PropTypes } from 'prop-types';
 
 import Input from '../../components/input/input.jsx';
 import { Button, Grid, List, ListItem } from '@material-ui/core';
-import { sendEvent } from '../../store/sender/actions';
 import { postEvent } from '../../api/sender.api';
 
 import useSenderStyle from './sender-style';
 
 function Sender() {
     const [inputs, setInputs] = useState({ applicant: '', applicantDepartment: '', description: '' });
-    const dispatch = useDispatch();
     const { t } = useTranslation();
     const classes = useSenderStyle();
 
@@ -32,7 +29,8 @@ function Sender() {
     function onSend() {
         postEvent(inputs)
             .then(() => {
-                dispatch(sendEvent());
+                //NotificationManager.success(t('SuccessMessage_EventCreated'));
+                //enqueueSnackbar(t('SuccessMessage_EventCreated'), { variant: "success" });
                 clearState();
             });
     };
@@ -62,13 +60,13 @@ function Sender() {
                         {t('CreateEvent_Submit_Button_Label')}
                     </Button>
                 </ListItem>
+
             </List>
         </Grid>
     );
 };
 
 Sender.propTypes = {
-    dispatch: PropTypes.func,
     t: PropTypes.func,
     classes: PropTypes.object
 }

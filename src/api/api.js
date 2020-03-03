@@ -1,14 +1,13 @@
-import { API_URL } from '../configuration/config';
+import i18n from '../configuration/i18n';
 
+import { API_URL } from '../configuration/config';
 export const CREATE_EVENT_URL = `${API_URL}/api/event`;
 export const REQUEST_EVENTS_URL = `${API_URL}/api/event/grid-data`;
-
 
 const headers = {
     'content-type': 'application/json',
     'accept': 'application/json'
 };
-
 
 const post = (url, data = {}, options = {}) => {
 
@@ -31,11 +30,33 @@ const get = (url, data = {}, options = {}) => {
     };
 
     return fetch(url, { ...options, headers })
-        .then((response) => response.json())
-        .catch((error) => {
-            throw error;
-        });
+        .then(handleErrors)
+        .then(handleResponse)
+        .catch((ex) => { throw ex; });
 }
+
+const handleResponse = (response) => {
+    return response.json();
+}
+
+const handleErrors = (response) => {
+    console.log(i18n.t('TRANSLATIONS IMPORT !!!!'));
+    return response.ok
+        ? response
+        : response.json()
+            .then((e) => throwNetworkError(e, response))
+            .catch((e) => throwNetworkError(e, response));
+}
+
+const throwNetworkError = (remoteError, response) => {
+    switch (response.status) {
+        case 401: throw new AuthError(remoteError.message);
+        case 403: throw new ForbiddenError(remoteError.message);
+        case 404: throw new NotFoundError(remoteError.message);
+        case 400: throw new BadRequestError(remoteError.message);
+        default: throw Error(remoteError.message);
+    }
+};
 
 export const api = {
     post,
