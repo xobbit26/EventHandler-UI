@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PropTypes } from 'prop-types';
+import { notify } from '../../utils/notify-utils';
 
 import Input from '../../components/input/input.jsx';
 import { Button, Grid, List, ListItem } from '@material-ui/core';
@@ -29,8 +30,7 @@ function Sender() {
     function onSend() {
         postEvent(inputs)
             .then(() => {
-                //NotificationManager.success(t('SuccessMessage_EventCreated'));
-                //enqueueSnackbar(t('SuccessMessage_EventCreated'), { variant: "success" });
+                notify(t('SuccessMessage_EventCreated'), 'success');
                 clearState();
             });
     };

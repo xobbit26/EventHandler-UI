@@ -1,17 +1,10 @@
 import i18n from '../configuration/i18n';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { notify } from '../utils/notify-utils';
 
 import { API_URL } from '../configuration/config';
 export const CREATE_EVENT_URL = `${API_URL}/api/event`;
 export const REQUEST_EVENTS_URL = `${API_URL}/api/event/grid-data`;
 
-// Call it once in your app. At the root of your app is the best place
-toast.configure({
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: true
-});
 
 const headers = {
     'content-type': 'application/json',
@@ -41,7 +34,10 @@ const get = (url, data = {}, options = {}) => {
     return fetch(url, { ...options, headers })
         .then(handleErrors)
         .then(handleResponse)
-        .catch((ex) => { throw ex; });
+        .catch((ex) => {
+            notify(i18n.t('ErrorMessage_InternalClient'), 'error');
+            throw ex;
+        });
 }
 
 const handleResponse = (response) => {
@@ -49,12 +45,10 @@ const handleResponse = (response) => {
 }
 
 const handleErrors = (response) => {
-    console.log(i18n.t('TRANSLATIONS IMPORT !!!!'));
     return response.ok
         ? response
         : response.text()
-            .then((e) => throwNetworkError(e, response))
-            //.catch((e) => throwNetworkError(e, response));
+            .then((e) => throwNetworkError(e, response));
 }
 
 const throwNetworkError = (remoteError, response) => {
@@ -64,7 +58,7 @@ const throwNetworkError = (remoteError, response) => {
         // case 404: throw new NotFoundError(remoteError.message);
         // case 400: throw new BadRequestError(remoteError.message);
         default: {
-            toast.error(i18n.t('ErrorMessasge_InternalServer'));
+            notify(i18n.t('ErrorMessage_InternalServer'), 'error');
             throw new Error(remoteError.message);
         };
     }

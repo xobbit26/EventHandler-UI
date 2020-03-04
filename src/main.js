@@ -9,8 +9,10 @@ import mainTheme from '../src/styles/mainTheme';
 import App from './App';
 import rootReducer from './store/rootReducer';
 import { logger } from 'redux-logger';
+import { toastConfigInit } from './utils/notify-utils';
 
 const store = createStore(rootReducer, applyMiddleware(logger));
+toastConfigInit();
 
 ReactDOM.render(
     <Provider store={store}>
