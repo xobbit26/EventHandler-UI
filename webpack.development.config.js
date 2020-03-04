@@ -71,11 +71,18 @@ module.exports = {
                 ],
             },
             {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ],
+            },
+            {
                 test: /\.json$/,
                 loader: "json-loader",
             }
         ]
-    },plugins: [
+    }, plugins: [
         new HtmlWebPackPlugin({
             template: './public/index.html',
             filename: './index.html',
