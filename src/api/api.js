@@ -34,10 +34,7 @@ const get = (url, data = {}, options = {}) => {
     return fetch(url, { ...options, headers })
         .then(handleErrors)
         .then(handleResponse)
-        .catch((ex) => {
-            notify(i18n.t('ErrorMessage_InternalClient'), 'error');
-            throw ex;
-        });
+        .catch((ex) => { throw ex; });
 }
 
 const handleResponse = (response) => {
